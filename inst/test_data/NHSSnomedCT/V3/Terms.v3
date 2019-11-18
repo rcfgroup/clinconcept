@@ -1,0 +1,315 @@
+00000|C|Read thesaurus||
+Y006t|C|Disorders||
+Y006u|C|Diseases||
+Y015p|C|Mental health disorder||
+Y01Kx|C|Learning disability||
+Y01Ky|C|Mental retardation||
+Y01Kz|C|Mental handicap||
+Y01L0|C|Mild mental retardat. IQ 50-70|Mild mental retardation, IQ in range 50-70|
+Y01L1|C|Moron||
+Y01L2|C|Feeble-minded||
+Y01L3|C|Educationally subnormal||
+Y01L4|C|Mental retardation OS|Other specified mental retardation|
+Y01L5|C|Moderate mental ret. IQ 35-49|Moderate mental retardation, IQ in range 35-49|
+Y01L7|C|Severe mental retard. IQ 20-34|Severe mental retardation, IQ in range 20-34|
+Y01L8|C|Profound mental retardat.IQ<20|Profound mental retardation with IQ less than 20|
+Y01LA|C|Other spec.mental retard. NOS|Other specified mental retardation NOS|
+Y01LB|C|Mental retardation NOS||
+Y01LC|C|Developmental disorder||
+Y1001|C|Respiratory disorder||
+Y1002|C|Respiratory system disease||
+Y103j|C|Purulent chronic bronchitis||
+Y103k|C|Mucopurulent chr bronchitis|Mucopurulent chronic bronchitis|
+Y106U|C|Chronic obstructive lung dis|Chronic obstructive lung disease|
+Y106V|C|COLD - Chron obstruc lung dise|COLD - Chronic obstructive lung disease|
+Y106W|C|Chron obstruc pulmon disease|Chronic obstructive pulmonary disease|
+Y106X|C|COPD - Chron obstr pulmon dise|COPD - Chronic obstructive pulmonary disease|
+Y106Y|C|Chronic obstruc airway disease|Chronic obstructive airway disease|
+Y106Z|C|COAD-Chron obstruc airway dise|COAD - Chronic obstructive airways disease|
+Y106a|C|Chronic obstructive bronchitis||
+Y106b|C|Chronic airway disease||
+Y106c|C|Chronic airway obstruction||
+Y106d|C|Chronic airflow limitation||
+Y106e|C|Chronic airflow obstruction||
+Y106f|C|Chro irreversible airway obstr|Chronic irreversible airway obstruction|
+Y106g|C|Chronic obstr.airway dis.OS|Other specified chronic obstructive airways disease|
+Y106h|C|Chronic obstr.airway dis.NOS|Chronic obstructive airways disease NOS|
+Y106i|C|Chronic bronchitis||
+Y106k|C|Bronchitis||
+Y106l|C|Chronic tracheobronchitis||
+Y106o|C|Obstructive chronic bronchitis||
+Y106p|C|Emphysematous bronchitis||
+Y106q|C|Acute exacerbation of COAD|Acute exacerbation of chronic obstructive airways disease|
+Y106r|C|Obstructive chr.bronchitis NOS|Obstructive chronic bronchitis NOS|
+Y106s|C|Other chronic bronchitis||
+Y106v|C|Chronic bronchitis NOS||
+Y106w|C|Ac exacerbation chr bronchitis|Acute exacerbation of chronic bronchitis|
+Y106x|C|Simple chronic bronchitis||
+Y106y|C|Chronic catarrhal bronchitis||
+Y106z|C|Chronic mucus hypersecretion||
+Y1071|C|Simple chronic bronchitis NOS||
+Y1076|C|Mucopurulent chr.bronchit.NOS|Mucopurulent chronic bronchitis NOS|
+Y1077|C|Occupational chr bronchitis|Occupational chronic bronchitis|
+Y1078|C|Occupational bronchitis||
+Y1079|C|Industrial bronchitis||
+Y107A|C|Byssinosis grade 3||
+Y107B|C|Bronchiolitis obliterans||
+Y107C|C|Obliterative bronchiolitis||
+Y107D|C|OB - Obliterativ bronchiolitis|OB - Obliterative bronchiolitis|
+Y107E|C|Toxic bronchiolitis obliterans||
+Y107F|C|Chem bronchiolitis obliterans|Chemical bronchiolitis obliterans|
+Y107G|C|Drug-induced bronchiolit oblit|Drug-induced bronchiolitis obliterans|
+Y107H|C|Emphysema||
+Y107I|C|Other emphysema||
+Y107M|C|Emphysema NOS||
+Y107N|C|Pulmonary emphysema||
+Y107O|C|Pulm emphysema, alpha-1 PI def|Pulmonary emphysema in alpha-1 PI deficiency|
+Y107P|C|Toxic emphysema||
+Y107Q|C|Chemical emphysema||
+Y107S|C|Chronic bullous emphysema||
+Y107T|C|Bullous emphysema||
+Y107U|C|Emphysematous bulla||
+Y107b|C|Compensatory emphysema||
+Y107c|C|Congenital lobar emphysema||
+Y107d|C|CLE - Congen lobar emphysema|CLE - Congenital lobar emphysema|
+Y107e|C|Infantile lobar emphysema||
+Y107f|C|Scar emphysema||
+Y107h|C|Interstit pulmonary emphysema|Interstitial pulmonary emphysema|
+Y107m|C|Unilateral emphysema||
+Y107n|C|MacLeods syndrome||
+Y107o|C|Swyer-James syndrome||
+Y10BN|C|Bronchiolitis oblit with UIP|Bronchiolitis obliterans with usual interstitial pneumonitis|
+Y10BO|C|BIP - Bronchiol oblit with UIP|BIP - Bronchiol obliterans with usual interstit pneumonitis|BIP - Bronchiolitis obliterans with usual interstitial pneumonitis
+Y10F4|C|Tracheobronchial disorder||
+Y10Fi|C|Bronchial disorder||
+Y7D0w|C|General learning disability||
+YE0Td|C|Chronic: [bronchitis NOS] or++|Chronic: [bronchitis NOS] or [tracheobronchitis]|
+YE1CJ|C|[X] (Unspec mental retard) o++|[X] (Unspec mental retard) or (mental defic [& subnorm] NOS)|[X] (Unspecified mental retardation) or (mental deficiency [& subnormality] NOS)
+YE1xp|C|(Mild mental retardation IQ ++|(Mild mental retard (& [feeble-mind][moron])) or (educ subn)|(Mild mental retardation IQ 50-70 (& [feeble-minded] or [moron])) or (educationally subnormal)
+YMAJK|C|[X]O spcf chron obs pulmon dis|[X]Other specified chronic obstructive pulmonary disease|
+YMAj4|C|Mixd simp+mucopur chron bronch|Mixed simple and mucopurulent chronic bronchitis|
+YMAjE|C|Chr obs pulm dis+ac exac,unspc|Chron obstruct pulmonary dis wth acute exacerbation, unspec|Chronic obstructive pulmonary disease with acute exacerbation, unspecified
+YMAjF|C|Chr obs pulm dis+ac l resp inf|Chronic obstruct pulmonary dis with acute lower resp infectn|Chronic obstructive pulmonary disease with acute lower respiratory infection
+YMAjG|C|Panlobular emphysema||
+YMAjH|C|Centrilobular emphysema||
+YMB71|C|[X]Other mental retardation||
+YMB72|C|[X]Oth retard no/min behav imp|[X]Oth mental retard with statement no or min impairm behav|[X]Other mental retardation with the statement of no, or minimal, impairment of behaviour
+YMB73|C|[X]Oth retard sign beh impair|[X]Oth mental retard sig impairment behav req attent/treatmt|[X]Other mental retardation, significant impairment of behaviour requiring attention or treatment
+YMB74|C|[X]Oth retard oth beh impair|[X]Other mental retardation, other impairments of behaviour|
+YMB75|C|[X]Oth retard no mention beh|[X]Other mental retardation without mention impairment behav|[X]Other mental retardation without mention of impairment of behaviour
+YMB76|C|[X]Unspecif mental retardation|[X]Unspecified mental retardation|
+YMB77|C|[X]Unsp retard no/min beh imp|[X]Unsp mental retard with statement no or min impairm behav|[X]Unspecified mental retardation with the statement of no, or minimal, impairment of behaviour
+YMB78|C|[X]Unsp retard sign beh impair|[X]Unsp mentl retard sig impairment behav req attent/treatmt|[X]Unspecified mental retardation, significant impairment of behaviour requiring attention or treatment
+YMB79|C|[X]Unsp retard oth beh impair|[X]Unspecified mental retardatn, other impairments of behav|[X]Unspecified mental retardation, other impairments of behaviour
+YMB7A|C|[X]Unsp retard no mention beh|[X]Unsp mental retardation without mention impairment behav|[X]Unspecified mental retardation without mention of impairment of behaviour
+YMIO9|C|[X]Mental subnormality NOS||
+YMImC|C|[X]Mental deficiency NOS||
+YMK6z|C|MacLeod's unilateral emphysema||
+YMKsY|C|Tracheobronchitis - chronic||
+Ya1I4|C|ESN - Educationally subnormal||
+Ya3CH|C|Borderline learning disability||
+Ya3CI|C|Borderline mental handicap||
+Ya3CJ|C|Borderline mental retardation||
+Ya3Dr|C|Mental subnormality||
+Ya3YD|C|MH - Mental handicap||
+Ya3YE|C|MR - Mental retardation||
+Ya5Jf|C|Acute infec exacerbation COAD|Acute infective exacerbation chronic obstruct airway disease|Acute infective exacerbation of chronic obstructive airways disease
+Ya5ag|C|Mild mental handicap||
+Ya5ah|C|Moderate mental handicap||
+Ya5ai|C|Severe mental handicap||
+Ya5aj|C|Profound mental handicap||
+YaRCu|C|COB - Chron obstruc bronchitis|COB - Chronic obstructive bronchitis|
+YaRCv|C|CAFL - Chron airflow limitatn|CAFL - Chronic airflow limitation|
+YaRCw|C|CAL - Chron airflow limitation|CAL - Chronic airflow limitation|
+YaRCx|C|CAO - Chron airflow obstructn|CAO - Chronic airflow obstruction|
+YaW33|C|Psychiatric disorder||
+YaaCE|C|Psychiatric illness||
+YaaCF|C|Mental illness||
+Yaap0|C|Clinical findings||
+Yadv4|C|OS chron obstruct pulmon dis|Other specified chronic obstructive pulmonary disease|
+Yadv5|C|Chr obstruc pulmonary dis NOS|Chronic obstructive pulmonary disease NOS|
+Yaeay|C|Mild chron obstr pulm disease|Mild chronic obstructive pulmonary disease|
+Yaeaz|C|Mod chron obstr pulm disease|Moderate chronic obstructive pulmonary disease|
+Yaeb2|C|Sev chron obstr pulm disease|Severe chronic obstructive pulmonary disease|
+YakmF|C|End stag chron obst airway dis|End stage chronic obstructive airways disease|
+Yaq8A|C|Very severe COPD|Very severe chronic obstructive pulmonary disease|
+Yavfv|C|Acut non-infect exacerbat COPD|Acute non-infective exacerbation of COPD|Acute non-infective exacerbation of chronic obstructive pulmonary disease
+Yavfw|C|Acut non-infect exacerbat COPD|Acute non-infective exacerbation of COPD|Acute non-infective exacerbation of COPD (chronic obstructive pulmonary disease)
+Yaz7e|C|Clinical 2017-04-01||
+y00WH|C|Methotrexate 2.5mg/1mL inj|Methotrexate 2.5mg/1mL injection solution|
+y00WI|C|Methotrexate 500mg inj pdr|Methotrexate 500mg injection (pdr for recon)|
+y00WM|C|Emtexate 250mg/10mL inj soln|Emtexate 250mg/10mL injection solution|
+y00WT|C|Emtexate 1g inj pdr|Emtexate 1g injection (pdr for recon)|
+y00WU|C|Emtexate 5g inj pdr|Emtexate 5g injection (pdr for recon)|
+y00Wa|C|Mercuric oxide [antimetabol]|Mercuric oxide [antimetabolite]no drugs here|
+y00kN|C|Mercuric oxide [eye]||
+y00kO|C|Mercuric oxide 1% eye ointment||
+y02kr|C|Antimetabolites||
+y02ks|C|Cytarabine||
+y02kt|C|Alexan 40mg/2mL injection||
+y02ku|C|Alexan 100mg/5mL injection||
+y02kv|C|Alexan-100 100mg/1mL infusion||
+y02kx|C|Cytosar 100mg inj pdr|Cytosar 100mg injection (pdr for recon)|
+y02kz|C|Cytarabine 1g inj pdr|Cytarabine 1g injection (pdr for recon)|
+y02l0|C|Cytarabine 40mg/2mL inj soln|Cytarabine 40mg/2mL injection solution|
+y02l1|C|Cytarabine 100mg/5mL inj soln|Cytarabine 100mg/5mL injection solution|
+y02l2|C|Cytarabine 100mg/1mL infusion||
+y02l3|C|Cytarabine 1g/10mL infusion||
+y02l4|C|Cytarabine 100mg inj pdr|Cytarabine 100mg injection (pdr for recon)|
+y02l5|C|Cytarabine 500mg inj pdr|Cytarabine 500mg injection (pdr for recon)|
+y02l6|C|Fluorouracil||
+y02l7|C|Fluoro-uracil 250mg capsule||
+y02lA|C|Fluorouracil 5% cream||
+y02lB|C|Fluorouracil 2.5g/100mL inj|Fluorouracil 2.5g/100mL injection|
+y02lC|C|Fluorouracil 250mg/10mL inj|Fluorouracil 250mg/10mL injection|
+y02lD|C|Fluorouracil 250mg capsule||
+y02lE|C|Fluorouracil 500mg/20mL inj|Fluorouracil 500mg/20mL injection|
+y02lF|C|Mercaptopurine||
+y02lG|C|Puri-Nethol 50mg tablet||
+y02lH|C|Mercaptopurine 50mg tablet||
+y02lI|C|Methotrexate||
+y02lJ|C|Methotrexate 2.5mg tablet||
+y02lK|C|Methotrexate 10mg tablet||
+y02lL|C|Methotrexate 5mg/2mL injection||
+y02lM|C|Methotrexate 25mg/1mL inj|Methotrexate 25mg/1mL injection|
+y02lN|C|Methotrexate 50mg/2mL inj|Methotrexate 50mg/2mL injection|
+y02lO|C|Methotrexate 100mg/4mL inj|Methotrexate 100mg/4mL injection|
+y02lP|C|Methotrexate 200mg/8mL inj|Methotrexate 200mg/8mL injection|
+y02lQ|C|Methotrexate 500mg/20mL inj|Methotrexate 500mg/20mL injection|
+y02lR|C|Methotrexate 1g/40mL injection||
+y02lS|C|Methotrexate 5g/200mL inj|Methotrexate 5g/200mL injection|
+y02lV|C|Methotrexate 1g/10mL injection||
+y02lW|C|Methotrexate 5g/50mL injection||
+y02lX|C|Thioguanine||
+y02lY|C|Lanvis 40mg tablet||
+y02lZ|C|Thioguanine 40mg tablet||
+y02mc|C|Pentostatin||
+y02md|C|Nipent 10mg inj pdr|Nipent 10mg injection (pdr for recon)|
+y02me|C|Pentostatin 10mg inj pdr|Pentostatin 10mg injection (pdr for recon)|
+y03AW|C|Triamcin+nyst 0.1%/100ku/g crm|Triamcinolone acetonide+nystatin 0.1%/100000units/g cream|
+y03E2|C|Nystatin+tolnaftate cream|Nystatin+tolnaftate 100000units/1%/g cream|
+y03E3|C|Nystatin+chlorhexidine cream|Nystatin+chlorhexidine hydrochloride 100000units/1%/g cream|
+y03Kr|C|Bupiv+adr 0.5%/50mcg/10mL inj|Bupiv HCl+adren 0.5%/50mcg/10mL(1:200,000) sterile wrap inj|Bupivacaine hydrochloride+adrenaline 0.5%/50micrograms/10mL(1:200000) sterile wrapped injection
+y03LK|C|Drug||
+y03Ze|C|Cytarabine 600mg/30mL infusion||
+y03Zf|C|Cytarabine 1.2g/60mL infusion||
+y03Zg|C|Fluorouracil 3.5g/140mL inf|Fluorouracil 3.5g/140mL infusion|
+y03Zh|C|Fluorouracil 1.75g/70mL inf|Fluorouracil 1.75g/70mL infusion|
+y03Zi|C|Methotrexate 375mg/30mL inf|Methotrexate 375mg/30mL infusion|
+y03Zj|C|Methotrexate 750mg/60mL inf|Methotrexate 750mg/60mL infusion|
+y03aM|C|Cytarabine 100mg inj pdr+dil|Cytarabine 100mg injection (pdr for recon)+diluent|
+y03aN|C|Cytarabine 1g inj pdr+diluent|Cytarabine 1g injection (pdr for recon)+diluent|
+y03vk|C|Lignoc+adren 2% ster wrap inj|Lignocaine HCl+adrenaline 2%/1:200000 sterile wrap injection|Lignocaine hydrochloride+adrenaline 2%/1:200000 sterile wrapped injection
+y03xI|C|Antifolate||
+y03xK|C|Purine antagonist||
+y03xM|C|Pyrimidine antagonist||
+y03xn|C|Antineop/immunosupp/immunostim|Antineoplastic, immunosuppressant and immunostimulant|
+y03xp|C|Antineoplastic||
+y03y5|C|Mercuric oxide||
+y07bA|C|Cytosar 100mg inj pdr+diluent|Cytosar 100mg injection (pdr for recon)+diluent|
+y07bC|C|Cytarabine 500mg inj pdr+dil|Cytarabine 500mg injection (pdr for recon)+diluent|
+y07fG|C|MTX - Methotrexate||
+y07jH|C|5FU - Fluorouracil||
+y07k2|C|6MP - Mercaptopurine||
+y07qw|C|Deoxycoformycin||
+y08GV|C|Cytarabine 500mg/5mL inj soln|Cytarabine 500mg/5mL injection solution|
+y08GW|C|Cytarabine 2g/20mL inj soln|Cytarabine 2g/20mL injection solution|
+y08WT|C|Cladribine||
+y08WU|C|Cladribine 10mg/10mL injection||
+y08WV|C|Leustat 10mg/10mL injection||
+y08XK|C|Gemcitabine||
+y08XN|C|Gemcitabine 200mg inj powder|Gemcitabine 200mg injection (pdr for recon)|
+y08XO|C|Gemcitabine 1g inj powder|Gemcitabine 1g injection (pdr for recon)|
+y08XP|C|Gemzar 200mg injection powder|Gemzar 200mg injection (pdr for recon)|
+y08XQ|C|Gemzar 1g injection powder|Gemzar 1g injection (pdr for recon)|
+y09bo|C|Raltitrexed||
+y09bp|C|Raltitrexed 2mg inj powder|Raltitrexed 2mg injection (pdr for recon)|
+y09bq|C|Tomudex 2mg injection powder|Tomudex 2mg injection (pdr for recon)|
+y09tI|C|Fluorouracil 250mg/5mL inj|Fluorouracil 250mg/5mL injection|
+y09tJ|C|Fluorouracil 500mg/10mL inj|Fluorouracil 500mg/10mL injection|
+y0A6Q|C|Fluorour+adr 30/0.1mg inj gel|Fluorouracil+adrenaline 30mg/0.1mg injection gel|
+y0AF3|C|Fluorouracil 5g/200mL infusion||
+y0AOg|C|Fluorouracil 2.5g/50mL inj|Fluorouracil 2.5g/50mL injection|
+y0AU6|C|Epoetin beta 100000iu inj+solv|Epoetin beta 100,000iu injection (pdr for recon)+solvent|
+y0Brz|C|Raltitrexed product||
+y0Bs5|C|Cladribine product||
+y0Ct2|C|Deoxycoforomycin 10mg inj pdr|Deoxycoforomycin 10mg injection (pdr for recon)|
+y0D5g|C|Mercuric oxide product||
+y0DDx|C|Cytarabine 500mg/25mL inj soln|Cytarabine 500mg/25mL injection solution|
+y0DE0|C|Cytarabine 100mg/5mL Cytosafe|Cytarabine Solution 100mg/5mL Cytosafe injection vial|
+y0Dmi|C|Capecitabine 150mg tablet||
+y0Dmj|C|Capecitabine||
+y0Dmk|C|Capecitabine 500mg tablet||
+y0Dml|C|Xeloda 150mg tablet||
+y0Dmm|C|Xeloda 500mg tablet||
+y0Dpf|C|Tegafur+uracil||
+y0Dpg|C|Tegafur+uracil 100mg/224mg cap|Tegafur+uracil 100mg/224mg capsule|
+y0Dph|C|Uftoral 100mg/224mg capsule||
+y0Evp|C|Tioguanine||
+y0Evq|C|Tioguanine 40mg tablet||
+y0EyG|C|Fluorouracil 1g/20mL injection||
+y0FJF|C|Bupi+adr 0.5%/50mcg/10mL inj|Bupiv HCl+adren 0.5%/50mcg/10mL(1:200,000) injection|Bupivacaine hydrochloride+adrenaline 0.5%/50micrograms/10mL(1:200000) injection
+y0FsR|C|Cytarabine 50mg injection susp|Cytarabine 50mg injection suspension|
+y0Fxs|C|Lidoc+epineph 2% ster wrap inj|Lidocaine HCl+epinephrine 2%/1:200000 sterile wrap injection|Lidocaine hydrochloride+epinephrine 2%/1:200000 sterile wrapped injection
+y0FzT|C|Lidoc+adren 2% ster wrap inj|Lidocaine HCl+adrenaline 2%/1:200000 sterile wrap injection|Lidocaine hydrochloride+adrenaline 2%/1:200000 sterile wrapped injection
+y0GQD|C|Pemetrexed||
+y0GQE|C|Pemetrexed 500mg inf pdr|Pemetrexed 500mg pdr for solution for conc for infusion|Pemetrexed 500mg powder for solution for concentrate for infusion
+y0GQF|C|Alimta 500mg infusion|Alimta 500mg powder for solution for conc for infusion|Alimta 500mg powder for solution for concentrate for infusion
+y0HBl|C|CLOFARABINE||
+y0HBm|C|EVOLTRA 20mg/20mL soln for inj|EVOLTRA 20mg/20mL solution for injection|
+y0HBn|C|CLOFARABINE 20mg/20mL soln inj|CLOFARABINE 20mg/20mL solution for injection|
+y0HOo|C|METHOTREXATE 20mg/2mL p/f syrg|METHOTREXATE 20mg/2mL solution for injection p/f syringe|METHOTREXATE 20mg/2mL solution for injection prefilled syringe
+y0HOp|C|METHOTREXATE 15mg/1.5mL syrng|METHOTREXATE 15mg/1.5mL solution for injection p/f syringe|METHOTREXATE 15mg/1.5mL solution for injection prefilled syringe
+y0HOq|C|METHOTREXATE 25mg/2.5mL syrng|METHOTREXATE 25mg/2.5mL solution for injection p/f syringe|METHOTREXATE 25mg/2.5mL solution for injection prefilled syringe
+y0HOu|C|METOJECT 20mg/2mL p/f syringe|METOJECT 20mg/2mL solution for injection prefilled syringe|
+y0HOv|C|METOJECT 25mg/2.5mL p/f syrng|METOJECT 25mg/2.5mL solution for injection prefilled syringe|
+y0HOw|C|METHOTREXATE 7.5mg/0.75mL syrg|METHOTREXATE 7.5mg/0.75mL solution for injection p/f syringe|METHOTREXATE 7.5mg/0.75mL solution for injection prefilled syringe
+y0HOx|C|METHOTREXATE 10mg/1mL p/f syrg|METHOTREXATE 10mg/1mL solution for injection p/f syringe|METHOTREXATE 10mg/1mL solution for injection prefilled syringe
+y0HQr|C|TRASYLOL 1000000 KIU inj 100mL|TRASYLOL 1,000,000 KIU injection 100mL|TRASYLOL 1,000,000 Kallikrein inactivator units injection 100mL
+y0HQs|C|APROTININ 1000000KIU inj 100mL|APROTININ 1,000,000 KIU injection 100mL|APROTININ 1,000,000 Kallikrein inactivator units injection 100mL
+y0HQt|C|TRASYLOL 2000000 KIU inj 200mL|TRASYLOL 2,000,000 KIU injection 200mL|TRASYLOL 2,000,000 Kallikrein inactivator units injection 200mL
+y0HQu|C|APROTININ 2000000KIU inj 200mL|APROTININ 2,000,000 KIU injection 200mL|APROTININ 2,000,000 Kallikrein inactivator units injection 200mL
+y0HRL|C|LITAK 10mg/5mL injection|LITAK 10mg/5mL solution for injection vials|
+y0HRM|C|CLADRIBINE 10mg/5mL injection|CLADRIBINE 10mg/5mL solution for injection vials|
+y0Hvz|C|NELARABINE||
+y0Hw0|C|ATRIANCE 250mg/50mL soln inj|ATRIANCE 250mg/50mL solution for injection|
+y0Hw1|C|NELARABINE 250mg/50mL soln inj|NELARABINE 250mg/50mL solution for injection|
+yz3CJ|C|AZACITIDINE||
+yz3IE|C|METOJECT 7.5mg/0.15mL inj pfs|METOJECT 7.5mg/0.15mL solution for injection pfs|
+yz3IF|C|METHOTREXATE 7.5mg/0.15mL inj|METHOTREXATE 7.5mg/0.15mL solution for injection pfs|
+yz3IG|C|METOJECT 10mg/0.2mL inj pfs|METOJECT 10mg/0.2mL solution for injection prefilled syringe|
+yz3IH|C|METHOTREXATE 10mg/0.2mL inj|METHOTREXATE 10mg/0.2mL solution for injection pfs|
+yz3II|C|METOJECT 15mg/0.3mL inj pfs|METOJECT 15mg/0.3mL solution for injection prefilled syringe|
+yz3IJ|C|METHOTREXATE 15mg/0.3mL inj|METHOTREXATE 15mg/0.3mL solution for injection pfs|
+yz3IK|C|METOJECT 20mg/0.4mL inj pfs|METOJECT 20mg/0.4mL solution for injection prefilled syringe|
+yz3IL|C|METHOTREXATE 20mg/0.4mL inj|METHOTREXATE 20mg/0.4mL solution for injection pfs|
+yz3IM|C|METOJECT 25mg/0.5mL inj pfs|METOJECT 25mg/0.5mL solution for injection prefilled syringe|
+yz3IN|C|METHOTREXATE 25mg/0.5mL inj|METHOTREXATE 25mg/0.5mL solution for injection pfs|
+yz4kr|C|METOJECT 30mg/0.6mL inj pfs|METOJECT 30mg/0.6mL solution for injection prefilled syringe|
+yz4ks|C|METHOTREXATE 30mg/0.6mL inj|METHOTREXATE 30mg/0.6mL solution for injection pfs|
+yz4kt|C|PEMETREXED 100mg pdr for inj|PEMETREXED 100mg powder for conc for solution for injection|
+yz4ku|C|ALIMTA 100mg pdr for infusion|ALIMTA 100mg powder for conc for solution for infusion|
+yz4tZ|C|EBETREX 7.5mg/0.75mL inj pfs|EBETREX 7.5mg/0.75mL soln for injection prefilled syringe|
+yz4ta|C|EBETREX 10mg/1mL inj pfs|EBETREX 10mg/1mL solution for injection prefilled syringe|
+yz4tb|C|EBETREX 15mg/1.5mL inj pfs|EBETREX 15mg/1.5mL solution for injection prefilled syringe|
+yz4tc|C|METHOTREXATE(2)||
+yz4vd|C|GEMCITABINE 200mg/5.3mL inf|GEMCITABINE 200mg/5.3mL conc for solution for infusion|
+yz4ve|C|GEMCITABINE 1g/26.3mL infusion|GEMCITABINE 1g/26.3mL concentrate for solution for infusion|
+yz4vf|C|GEMCITABINE 2g/52.6mL infusion|GEMCITABINE 2g/52.6mL concentrate for solution for infusion|
+yz53j|C|ACTIKERALL 5/100mg/g soln 25mL|ACTIKERALL 5mg/g+100mg/g cutaneous solution 25mL|
+yz53k|C|FLUOROURAC+SALICYLIC 5/100mg/g|FLUOROURACIL+SALICYLIC ACID 5mg/100mg/g cutaneous solution|
+yz5uG|C|TEGAFUR||
+yz6VV|C|XALUPRINE 20mg/mL suspension|XALUPRINE 20mg/mL oral suspension|
+yz6VW|C|MERCAPTOPURINE 20mg/mL susp|MERCAPTOPURINE 20mg/mL oral suspension|
+yz6Xq|C|GEMCITABINE 200mg/2mL infusion|GEMCITABINE 200mg/2mL concentrate for solution for infusion|
+yz6Xr|C|GEMCITABINE 1g/10mL infusion|GEMCITABINE 1g/10mL concentrate for solution for infusion|
+yz6Xs|C|GEMCITABINE 2g/20mL infusion|GEMCITABINE 2g/20mL concentrate for solution for infusion|
+yz6Xt|C|DECITABINE||
+yz7TU|C|TELEFLEX 850560-000000 valve|TELEFLEX 850560-000000 catheter valve|
+yz7U0|C|CAPECITABINE 300mg tablets||
+yz8iF|C|TELEFLEX 500mL/850356 leg bag|TELEFLEX 500mL/850356-000000 3-chamber 10cm tube leg bags|
+yz8iG|C|TELEFLEX 500mL/850355 leg bag|TELEFLEX 500mL/850355-000000 3-chamber 30cm tube leg bags|
+yz94Z|C|PEMETREXED 100mg/4mL soln inj|PEMETREXED 100mg/4mL solution for injection|
+yz94a|C|PEMETREXED 500mg/20mL soln inj|PEMETREXED 500mg/20mL solution for injection|
+yz94b|C|PEMETREXED 1000mg/40mL inj|PEMETREXED 1000mg/40mL solution for injection|
+yz99m|C|Drugs 2016-04-01||

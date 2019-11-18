@@ -1,0 +1,21 @@
+Package: clinconcept
+Type: Package
+Title: A package for loading and querying clinical concept dictionaries in R
+Version: 0.1.0
+Author: Rob Free
+Maintainer: Rob Free <rob.free@le.ac.uk>
+Description: The package provides tools to build/load a database with one or more clinical
+    dictionaries using UK-based downloads of these dictionaries and query/search the dictionaries using
+    both hierarchical/DAG-based searches and advanced filtering.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+  testthat,
+  RMySQL (>= 0.10)
+Imports:
+  dplyr (>= 0.7),
+  RSQLite (>= 2.0),
+  jsonlite (>= 1.4),
+  readr (>= 1.1)
+  
