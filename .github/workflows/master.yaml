@@ -52,7 +52,7 @@ jobs:
         run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error')"
 
   windows:
-    runs-on: ['3.6']
+    runs-on: ['latest']
     steps:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
