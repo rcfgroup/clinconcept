@@ -18,4 +18,4 @@ Imports:
   RSQLite (>= 2.0),
   jsonlite (>= 1.4),
   readr (>= 1.1)
-  
+RoxygenNote: 6.0.1

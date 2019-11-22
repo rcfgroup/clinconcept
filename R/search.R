@@ -58,6 +58,7 @@ search_concept_table<-function(tbl,fcall,include_synonyms,output) {
 #' Enable SQLite database query case-sensitivity
 #'
 #' @param dict dictionary object (see cc_from_list/cc_from_file)
+#' @export
 #
 enable_case_sensitivity<-function(dict) {
   if(!is(dict$src, "SQLiteConnection")) {
@@ -69,6 +70,7 @@ enable_case_sensitivity<-function(dict) {
 #' Disable SQLite database query case-sensitivity
 #'
 #' @param dict dictionary object (see cc_from_list/cc_from_file)
+#' @export
 #
 disable_case_sensitivity<-function(dict) {
   if(!is(dict$src, "SQLiteConnection")) {

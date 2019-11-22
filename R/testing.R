@@ -60,7 +60,7 @@ is_sqlite_available<-function() {
   )
   getOption("rcc.sqlite")
 }
-#' Utility function which switches on/off debugging messages and returns the current status of debugging
+#' Utility function which switches on/off mysql testing
 #'
 #' @param value Boolean (T/F or TRUE/FALSE)
 #' @export

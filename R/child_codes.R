@@ -11,8 +11,8 @@ get_child_codes<-function(dict,parent_code,immediate_children=F,output_codes=F,c
 #' @param immediate_children indicates if only one level (e.g. just children) should be returned
 #' @return character vector including descendent codes (excluding read_code provided)
 #' @examples
-#' config<-rexceed::rexceed_config_from_home("20160103")
-#' h3_v2_children<-rexceed::ref_get_child_v2_readcodes(config,"H3...",TRUE)
+#' config<-cc_from_home("20160103")
+#' h3_v2_children<-clinconcept::get_child_codes(config,"H3...",TRUE)
 #
 get_child_codes.NHSReadV2<-function(dict,parent_code,immediate_children=F,output_codes=F,current_only=F) {
   #obtain positions of dots in parent_code
@@ -31,7 +31,7 @@ get_child_codes.NHSReadV2<-function(dict,parent_code,immediate_children=F,output
     query<-paste0(substring(parent_code,1,firstDot[1]-1),"%")
   }
 
-  codes<-dplyr::tbl(dict$src,"read_version2")
+  codes<-tbl(dict$src,"read_version2")
   if(dict$type=="sqlite") {
     dbExecute(dict$src,"pragma case_sensitive_like = yes")
   }
@@ -54,7 +54,7 @@ get_child_codes.NHSReadV2<-function(dict,parent_code,immediate_children=F,output
 get_child_codes.NHSReadV3<-function(dict,parent_code,immediate_children=F,current_only=F) {
   child_codes<-get_read_v3_descendent_codes(dict$src,parent_code,immediate_children);
 
-  codes<-dplyr::tbl(dict$src,"read_version3")
+  codes<-tbl(dict$src,"read_version3")
   if(length(child_codes)==0) {
     return(NA)
   }
@@ -75,7 +75,7 @@ is_code_present<-function(dict,code) {
   UseMethod("is_code_present")
 }
 is_code_present.NHSReadV3<-function(dict,code) {
-  read_tbl <- dict$src %>% dplyr::tbl("read_version3") %>% dplyr::select(c("read_code","synonym")) %>% dplyr::filter(read_code==code & synonym!='1')
+  read_tbl <- dict$src %>% tbl("read_version3") %>% select(c("read_code","synonym")) %>% dplyr::filter(read_code==code & synonym!='1')
   codes<-read_tbl %>% count() %>% collect()
   codes$n>0
 }

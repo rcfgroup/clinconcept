@@ -2,7 +2,6 @@ library(DBI)
 library(dplyr)
 library(jsonlite)
 
-
 #' Create a clinical dictionary object using a list of options. This is used by subsequent functions
 #' to direct building and querying.
 #'
@@ -61,12 +60,14 @@ cc_from_list <- function(dict_type,options) {
   type = options$type
 
   if(type=="mysql") {
-    library(RMySQL)
-    options$src<-DBI::dbConnect(RMySQL::MySQL(),user=user,pass=pass,host=host,port=port,dbname=dbname)
+    if(requireNamespace("RMySQL", quietly=T)) {
+      options$src<-dbConnect(RMySQL::MySQL(),user=user,pass=pass,host=host,port=port,dbname=dbname)
+    }
   }
   else {
-    library(RSQLite)
-    options$src<-DBI::dbConnect(RSQLite::SQLite(),dbname=dbname,create=T)
+    if(requireNamespace("RSQLite", quietly=T)) {
+      options$src<-dbConnect(RSQLite::SQLite(),dbname=dbname,create=T)
+    }
   }
   options
 }
@@ -89,7 +90,7 @@ cc_from_list <- function(dict_type,options) {
 #' @export
 #' @seealso \code{\link{cc_from_list}}, \code{\link{cc_from_home}}
 #' @examples
-#' dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json"))
+#' dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json")
 #'
 #' #clinical dictionary object then passed to other functions
 #' ...
@@ -105,7 +106,7 @@ cc_from_file<-function(dict_type, json_file) {
   if(!file.exists(json_file)) {
     stop(paste0("Dictionary config file '",json_file,"' does not exist"))
   }
-  json_data<-jsonlite::fromJSON(json_file)
+  json_data<-fromJSON(json_file)
   if(length(names(json_data))==0) {
     stop(paste0("Dictionary config file '",json_file,"' contains no options"))
   }

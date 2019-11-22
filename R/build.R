@@ -1,4 +1,5 @@
 library(readr)
+library(DBI)
 
 #' Builds chosen dictionary concept tables in a database. Uses the supplied dictionary object to
 #' determine how to do this. The concept_file_path specifies the location of the downloaded clinical code files.
@@ -58,7 +59,6 @@ build_concept_tables <- function(dict,concept_file_path) {
 #' @param replacements List of key-value replacements using the placeholder names as key.
 #'
 #' @return
-#' @export
 #'
 #' @examples
 load_sql_statements_from_file <- function(filename,replacements) {
@@ -99,7 +99,6 @@ load_sql_statements_from_file <- function(filename,replacements) {
 #' @param statements Vector of SQL statements
 #'
 #' @return
-#' @export
 #'
 #' @examples
 execute_sql_statements <-function(dict, statements) {
@@ -138,7 +137,6 @@ write_table_from_file<-function(src,table_name,filename,col_names=TRUE,col_types
 #' @param match Regular expression to use
 #'
 #' @return File name
-#' @export
 #'
 #' @examples
 #' find_matching_file("/path/to/data","/description/")

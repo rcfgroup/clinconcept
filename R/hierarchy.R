@@ -55,7 +55,7 @@ get_relationships<-function(dict,code,children) {
 }
 
 fetch_relation_codes<-function(src,rel_code,tbl_name, code_field, parent_code_field,children=T) {
-  rel_tbl<-dplyr::tbl(src,tbl_name) %>% dplyr::select(c(code_field,parent_code_field))
+  rel_tbl<-tbl(src,tbl_name) %>% select(c(code_field,parent_code_field))
 
   if(children) {
     option_str<-paste0(parent_code_field,"== rel_code");
@@ -66,7 +66,7 @@ fetch_relation_codes<-function(src,rel_code,tbl_name, code_field, parent_code_fi
 
   rel_tbl<-eval(parse(text = paste0("filter(rel_tbl,", option_str, ")")))
 
-  relation_rows<-dplyr::collect(rel_tbl)
+  relation_rows<-collect(rel_tbl)
   if(nrow(relation_rows)==0) {
     return(NULL);
   }
@@ -125,7 +125,6 @@ get_relation_codes<-function(src,rel_code,immediate_relations=F,children=T,tbl_n
 #' @param children T/F flag to return children (T) or parents (F)
 #'
 #' @return
-#' @export
 #'
 extract_relations_from_dag<-function(dict,code,immediate_relations,children){
   code_data<-new("code_data")
@@ -143,7 +142,6 @@ extract_relations_from_dag<-function(dict,code,immediate_relations,children){
 #' @param immediate T/F flag to return just immediate children or all children
 #'
 #' @return List containing dplyr::filter query op and value
-#' @export
 #'
 create_query_params_for_children_from_hierarchy<-function(code,immediate=F) {
   dot_pos<-get_dot_position(code)
@@ -167,7 +165,6 @@ create_query_params_for_children_from_hierarchy<-function(code,immediate=F) {
 #' @param immediate T/F flag to return just immediate parents or all parents
 #'
 #' @return List containing dplyr::filter query op and value
-#' @export
 #'
 create_query_params_for_parents_from_hierarchy<-function(code,immediate=F) {
   dot_pos<-get_dot_position(code)
@@ -197,7 +194,6 @@ create_query_params_for_parents_from_hierarchy<-function(code,immediate=F) {
 #' @param code Code to search
 #'
 #' @return An integer specifying the location of the first dot
-#' @export
 #'
 #' @examples
 get_dot_position<-function(code) {
@@ -217,7 +213,6 @@ get_dot_position<-function(code) {
 #' @param children T/F flag to return children (T) or parents (F)
 #'
 #' @return
-#' @export
 #'
 extract_relations_from_hierarchy<-function(dict,code,immediate_relations=F,children=T) {
   if(!is_code_present(dict,code)) {
@@ -229,7 +224,7 @@ extract_relations_from_hierarchy<-function(dict,code,immediate_relations=F,child
   else {
     params<-create_query_params_for_parents_from_hierarchy(code,immediate_relations)
   }
-  codes<-dplyr::tbl(dict$src,get_ctable_name(dict))
+  codes<-tbl(dict$src,get_ctable_name(dict))
   if(cc_debug()) {
     print(paste("params",params))
   }

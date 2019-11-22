@@ -87,7 +87,7 @@ is_code_present<-function(dict,code) {
 }
 
 is_code_present.clinconcept<-function(dict,code) {
-  code_tbl <- dict$src %>% dplyr::tbl(get_ctable_name(dict));
+  code_tbl <- dict$src %>% tbl(get_ctable_name(dict));
   fct<-paste0("filter(code_tbl,",get_ctable_code_field(dict)," == code)")
   code_tbl<-eval(parse(text=fct))
   codes<-code_tbl %>% count() %>% collect()
