@@ -1,4 +1,5 @@
-library(dplyr)
+utils::globalVariables(c("status","active","read_code","synonym"))
+
 get_ctable_name.NHSReadV3<-function(dict) {"read_version3"}
 get_ctable_code_field.NHSReadV3<-function(dict) {"read_code"}
 get_ctable_term_field.NHSReadV3<-function(dict) {"term"}
@@ -29,7 +30,7 @@ build_concept_tables.sqlite.NHSReadV3 <- function(dict,replacements) {
 get_child_codes.NHSReadV3<-function(dict,code,immediate_children=F,current_only=F) {
   codes<-extract_relations_from_dag(dict,code,immediate_children,children=T)
   if(current_only) {
-    code_tbl<-tbl(dict$src,get_ctable_name(dict)) %>% filter(read_code %in% codes & status=='C') %>% collect()
+    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(code %in% codes & status=='C') %>% dplyr::collect()
     return(unique(code_tbl$read_code))
   }
   codes
@@ -38,12 +39,21 @@ get_parent_codes.NHSReadV3<-function(dict,code,immediate_parents=F,current_only=
   codes<-extract_relations_from_dag(dict,code,immediate_parents,children=F)
 
   if(current_only) {
-    code_tbl<-tbl(dict$src,get_ctable_name(dict)) %>% filter(read_code %in% codes & status=='C') %>% collect()
+    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(code %in% codes & status=='C') %>% dplyr::collect()
     return(unique(code_tbl$read_code))
   }
   codes
 }
 
 get_relationships.NHSReadV3<-function(dict,code,children) {
-  collect(extract_relations_from_dag(dict,code,immediate_relations=F,children=children))
+  dplyr::collect(extract_relations_from_dag(dict,code,immediate_relations=F,children=children))
 }
+
+# ' @importFrom rlang .data
+
+is_code_present.NHSReadV3<-function(dict,code) {
+  read_tbl <- dict$src %>% dplyr::tbl("read_version3") %>% dplyr::select(c("read_code","synonym")) %>% dplyr::filter(read_code==code & synonym!='1')
+  codes<-read_tbl %>% dplyr::count() %>% dplyr::collect()
+  codes$n>0
+}
+

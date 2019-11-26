@@ -1,15 +1,10 @@
-library(testthat)
-library(clinconcept)
-library(readr)
-
-if(!is_sqlite_available()) {
-  return(NA)
-}
-
+skip_if_not(is_sqlite_available())
+browser()
 dict<-setup_test_dict("NHSICD10",T)
 
 context("ICD10 child code retrieval functions")
 
+#' importFrom clinconcept "expect_child_codes"
 test_that("get_child_codes returns all ICD10 descendent codes when default parameters",{
   skip_on_cran()
   expect_child_codes(dict,"J44",c("J44.0","J44.1","J44.8","J44.9"))

@@ -12,9 +12,6 @@ load_sql_statements_from_file(filename, replacements)
 
 \item{replacements}{List of key-value replacements using the placeholder names as key.}
 }
-\value{
-
-}
 \description{
 Utility function which reads SQL statements from a file and does basic placeholder replacement of
 <placeholder> type strings in the statements.

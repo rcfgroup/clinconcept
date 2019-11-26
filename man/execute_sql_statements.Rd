@@ -11,9 +11,6 @@ execute_sql_statements(dict, statements)
 
 \item{statements}{Vector of SQL statements}
 }
-\value{
-
-}
 \description{
 Utility function which loops through a vector of SQL statements and executes them
 }

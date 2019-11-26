@@ -1,9 +1,4 @@
-library(clinconcept)
-library(testthat)
-library(readr)
-if(!is_sqlite_available()) {
-  return(NA)
-}
+skip_if_not(is_sqlite_available())
 exp_h2_readcodes<-c("H30..", "H300.", "H301.", "H302.", "H30z.", "H31..", "H310.",
                     "H3100", "H3101", "H310z", "H311.", "H3110", "H3111", "H311z",
                     "H312.", "H3120", "H3121", "H3122", "H3123", "H312z", "H313.",
@@ -25,7 +20,6 @@ dict<-setup_test_dict("NHSReadV2",T)
 context("READ V2 child code retrieval functions")
 
 test_that("get_child_codes returns all READ v2 descendent codes when default parameters",{
-  skip_on_cran()
   expect_child_codes(dict,"H3...",exp_h2_readcodes)
   expect_child_codes(dict,"H31..",c("H310.", "H3100", "H3101", "H310z", "H311.", "H3110", "H3111",
                                     "H311z", "H312.", "H3120", "H3121", "H3122", "H3123", "H312z",
@@ -35,7 +29,6 @@ test_that("get_child_codes returns all READ v2 descendent codes when default par
 })
 
 test_that("get_child_codes returns filtered READ V2 descendent codes when immediate_children flag",{
-  skip_on_cran()
   expect_child_codes(dict,"H3...",c("H30..", "H31..", "H32..", "H33..", "H34..", "H35..", "H36..", "H37..", "H38..", "H39..", "H3A..", "H3B..", "H3y..", "H3z.."),immediate=T)
   expect_child_codes(dict,"H31..",c("H310.", "H311.", "H312.","H313.", "H31y.", "H31z."),immediate=T);
   expect_child_codes(dict,"H32..",c("H320.", "H321.", "H322.", "H32y.", "H32z."),immediate=T)

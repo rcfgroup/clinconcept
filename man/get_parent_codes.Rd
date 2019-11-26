@@ -19,7 +19,9 @@ get_parent_codes(dict, code, immediate_parents = F, current_only = T)
 Get parent codes from the supplied clinical dictionary
 }
 \examples{
+\dontrun{
 dict<-cc_from_file("/path/to/dictconfig")
 h3_parent_codes<-get_parent_codes(dict,"H3...",immediate_parents=F)
 
+}
 }

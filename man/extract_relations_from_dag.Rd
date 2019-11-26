@@ -15,9 +15,6 @@ extract_relations_from_dag(dict, code, immediate_relations, children)
 
 \item{children}{T/F flag to return children (T) or parents (F)}
 }
-\value{
-
-}
 \description{
 Internal function used to get relations from a diacyclic graph-type dictionary such as READ v3 or SNOMED-CT.
 }

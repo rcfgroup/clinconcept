@@ -18,7 +18,8 @@ TRUE if present, FALSE if not
 Determine if a code is present in the supplied clinical dictionary
 }
 \examples{
+\dontrun{
 dict<-cc_from_file("/path/to/dictconfig")
 h3_child_codes<-get_parent_codes(dict,"H31..",immediate_children=F)
-
+}
 }

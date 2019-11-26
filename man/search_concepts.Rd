@@ -22,9 +22,11 @@ Depends on output parameter. Default is a dplyr::tbl which can undergo additiona
 Search clinical codes in the specified dictionary using dplyr filter options
 }
 \examples{
+\dontrun{
 config<-cc_from_file("/path/to/dictconfig")
 
 #return all read codes containing 'asthma' and 'lung'
 
  asthma_lung_codes<-search_concepts(config,term \%like\% "asthma" | term \%like\% "lung",include_synonyms=F)
+}
 }

@@ -2,31 +2,23 @@
 % Please edit documentation in R/core.R
 \name{cc_from_file}
 \alias{cc_from_file}
-\title{This function will read an ini file containing options used to build a clinical dictionary object. This is used by subsequent functions
+\title{This function will read a JSON file containing options used to build a clinical dictionary object. This is used by subsequent functions
 to direct building and querying. For security reasons, this function and \code{\link{cc_from_home}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.}
 \usage{
 cc_from_file(dict_type, json_file)
 }
 \arguments{
-\item{json_file}{Location of JSON file containing options to use to create a clinical dictionary object
+\item{dict_type}{Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT}
 
-Global options (* specifies required options)
-  type - specifies the database management system being used. Currently supported are mysql and sqlite [default])
-  dbname* - when mysql this specifies the database name; when sqlite specifies the location of the database file
-
-  user - database user
-  pass - database password
-  host - database host (default localhost)
-  port - database port (default 3306)}
-
-\item{code_type}{Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT}
+\item{json_file}{Location of JSON file containing options to use to create a clinical dictionary object}
 }
 \description{
-This function will read an ini file containing options used to build a clinical dictionary object. This is used by subsequent functions
+This function will read a JSON file containing options used to build a clinical dictionary object. This is used by subsequent functions
 to direct building and querying. For security reasons, this function and \code{\link{cc_from_home}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
 }
 \examples{
-dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json"))
+\dontrun{
+dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json")
 
 #clinical dictionary object then passed to other functions
 ...
@@ -36,7 +28,7 @@ dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json"))
    "type":"sqlite"
    "dbname":"/path/to/sqlitedb.sqlite"
  }
-
+}
 
 }
 \seealso{

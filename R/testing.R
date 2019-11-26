@@ -1,5 +1,3 @@
-library(readr)
-
 setup_test_dict<-function(dict_type,force_create=F) {
   test_path = getwd()
 
@@ -43,7 +41,7 @@ expect_child_codes<-function(dict,code,exp_child_codes, immediate=F, current=F) 
     print(paste("obs code",code,"current=",current,"immediate=",immediate,paste(sort(obs_child_codes),collapse=",")))
     print(paste("exp code",code,"current=",current,"immediate=",immediate,paste(sort(exp_child_codes),collapse=",")))
   }
-  expect_equal(sort(obs_child_codes),sort(exp_child_codes))
+  testthat::expect_equal(sort(obs_child_codes),sort(exp_child_codes))
 }
 expect_parent_codes<-function(dict,code,exp_parent_codes, immediate=F, current=F) {
   obs_parent_codes<-get_parent_codes(dict,code,immediate_parents=immediate,current_only=current)
@@ -51,36 +49,36 @@ expect_parent_codes<-function(dict,code,exp_parent_codes, immediate=F, current=F
     print(paste("obs code",code,"current=",current,"immediate=",immediate,paste(sort(obs_parent_codes),collapse=",")))
     print(paste("exp code",code,"current=",current,"immediate=",immediate,paste(sort(exp_parent_codes),collapse=",")))
   }
-  expect_equal(sort(obs_parent_codes),sort(exp_parent_codes))
+  testthat::expect_equal(sort(obs_parent_codes),sort(exp_parent_codes))
 }
 is_sqlite_available<-function() {
-  options(rcc.sqlite=T)
-  tryCatch(system2(c("sqlite3","--version"),stdout=T,stderr=T),
-           error=function(err) { options(rcc.sqlite=F) }
+  options(cc_sqlite=TRUE)
+  tryCatch(system2(c("sqlite3","--version"),stdout=TRUE,stderr=TRUE),
+           error=function(err) { options(cc_sqlite=FALSE) }
   )
-  getOption("rcc.sqlite")
+  getOption("cc_sqlite")
 }
 #' Utility function which switches on/off mysql testing
 #'
 #' @param value Boolean (T/F or TRUE/FALSE)
 #' @export
-#' @returns T if debugging is on
+#' @return TRUE if mysql testing is on
 #' @examples
 #'
 #' #switch debugging on
-#' cc_debug(T)
+#' test_mysql(TRUE)
 #'
 #' #log something if debugging is on
-#' if(cc_debug()) {
-#'   print("debugging is on")
+#' if(test_mysql()) {
+#'   print("mysql testing is on")
 #' }
 #'
 test_mysql<-function(value=NULL) {
-  if(is.null(getOption("rcc.test_mysql"))) {
-    options(rcc.test_mysql=F)
+  if(is.null(getOption("cc_test_mysql"))) {
+    options(cc_test_mysql=F)
   }
   if(is.null(value)) {
-    return(getOption("rcc.test_mysql"))
+    return(getOption("cc_test_mysql"))
   }
-  options(rcc.test_mysql=value)
+  options(cc_test_mysql=value)
 }

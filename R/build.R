@@ -1,6 +1,3 @@
-library(readr)
-library(DBI)
-
 #' Builds chosen dictionary concept tables in a database. Uses the supplied dictionary object to
 #' determine how to do this. The concept_file_path specifies the location of the downloaded clinical code files.
 #' <data-file-path> placeholders in the SQL file are replaced with the supplied concept_file_path.
@@ -11,14 +8,7 @@ library(DBI)
 #' @param dict Dictionary object
 #' @param concept_file_path Path to the downloaded concept files
 #'
-#' @return
 #' @export
-#'
-#' @examples
-#'
-#' dict<-cc_from_file("/path/to/dictconfig")
-#' build_concept_table(dict,"/path/to/readfiles")
-#
 build_concept_tables <- function(dict,concept_file_path) {
   #replacements are strings replaced in the SQL files with the list value
   #e.g. <data-file-path> will get replaced with the concept_file_path variable
@@ -58,9 +48,6 @@ build_concept_tables <- function(dict,concept_file_path) {
 #' @param filename SQL file to load and process
 #' @param replacements List of key-value replacements using the placeholder names as key.
 #'
-#' @return
-#'
-#' @examples
 load_sql_statements_from_file <- function(filename,replacements) {
   if(cc_debug()) {
     print(paste("Load SQL file",filename))
@@ -98,16 +85,13 @@ load_sql_statements_from_file <- function(filename,replacements) {
 #' @param dict Dictionary object
 #' @param statements Vector of SQL statements
 #'
-#' @return
-#'
-#' @examples
 execute_sql_statements <-function(dict, statements) {
   for(statement in statements) {
     if(cc_debug()) {
       print(paste("SQL:",statement))
     }
-    res<-dbSendQuery(dict$src,statement)
-    dbClearResult(res)
+    res<-DBI::dbSendQuery(dict$src,statement)
+    DBI::dbClearResult(res)
   }
 
 }
@@ -117,18 +101,16 @@ execute_sql_statements <-function(dict, statements) {
 #' @param table_name Name of table in database
 #' @param filename Filename of delimited file
 #' @param col_names Column names passed directly to readr::read_delim
-#' @param col_types Column types passed directly to dbWriteTable
+#' @param col_types Column types passed directly to DBI::dbWriteTable
 #' @param delim Field delimiter to use to read file passed directly to readr::read_delim
 #' @param file_col_types File column types passed directly to readr::read_delim
 #' @param header Column header parameter passed directly to dbWriteTable
+#' @param skip_rows Number of rows to skip (default = 0)
 #'
-#' @return
-#'
-#' @examples
 write_table_from_file<-function(src,table_name,filename,col_names=TRUE,col_types=NULL,delim=",",file_col_types=NULL,header=F, skip_rows=0) {
   rows<-readr::read_delim(filename,delim=delim,
                           col_names=col_names,quote="",col_types=file_col_types, skip=skip_rows)
-  dbWriteTable(src,table_name,rows,field.types=col_types,header=header,overwrite=T)
+  DBI::dbWriteTable(src,table_name,rows,field.types=col_types,header=header,overwrite=T)
 }
 
 #' Find file matching regular expression in directory. Used to retrieve code files which vary depending on version.
@@ -139,8 +121,9 @@ write_table_from_file<-function(src,table_name,filename,col_names=TRUE,col_types
 #' @return File name
 #'
 #' @examples
+#'\dontrun{
 #' find_matching_file("/path/to/data","/description/")
-#'
+#'}
 find_matching_file<-function(file_path,match) {
   files_in_path=Sys.glob(paste0(file_path,"/*"));
   file<-grep(match,files_in_path,value=T)

@@ -1,6 +1,4 @@
-library(testthat)
 library(clinconcept)
-test_package("clinconcept")
+library(testthat)
 
-
-
+test_check("clinconcept", reporter="rstudio")

@@ -17,8 +17,3 @@ build_concept_tables(dict, concept_file_path)
 Internally the function executes specific SQL files before and after a dictionary/database specific function (if it exists).
 The form of this function is build_concept_tables.db_type.dict_type. It is passed the dictionary object and the list of replacements.
 }
-\examples{
-
-dict<-cc_from_file("/path/to/dictconfig")
-build_concept_table(dict,"/path/to/readfiles")
-}

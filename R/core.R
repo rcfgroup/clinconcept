@@ -1,12 +1,7 @@
-library(DBI)
-library(dplyr)
-library(jsonlite)
-
 #' Create a clinical dictionary object using a list of options. This is used by subsequent functions
 #' to direct building and querying.
 #'
 #' The preferred approach is to use \code{\link{cc_from_file}} as this is more secure.
-#'
 #' @param dict_type Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT
 #' @param options List of options to use to create a clinical dictionary object
 #'
@@ -20,15 +15,15 @@ library(jsonlite)
 #'   host - database host (default localhost)
 #'   port - database port (default 3306)
 #'
-#' @return
 #' @export
 #' @seealso \code{\link{cc_from_file}}, \code{\link{cc_from_home}}
 #' @examples
+#' \dontrun{
 #' dict<-cc_from_list(list(type="sqlite",dbname="/path/to/sqlitedb.sqlite"))
 #'
 #' #clinical dictionary object then passed to other functions
 #' ...
-#'
+#'}
 #'
 cc_from_list <- function(dict_type,options) {
   if(class(options)!="list") {
@@ -61,35 +56,25 @@ cc_from_list <- function(dict_type,options) {
 
   if(type=="mysql") {
     if(requireNamespace("RMySQL", quietly=T)) {
-      options$src<-dbConnect(RMySQL::MySQL(),user=user,pass=pass,host=host,port=port,dbname=dbname)
+      options$src<-DBI::dbConnect(RMySQL::MySQL(),user=user,pass=pass,host=host,port=port,dbname=dbname)
     }
   }
   else {
     if(requireNamespace("RSQLite", quietly=T)) {
-      options$src<-dbConnect(RSQLite::SQLite(),dbname=dbname,create=T)
+      options$src<-DBI::dbConnect(RSQLite::SQLite(),dbname=dbname,create=T)
     }
   }
   options
 }
-#' This function will read an ini file containing options used to build a clinical dictionary object. This is used by subsequent functions
+#' This function will read a JSON file containing options used to build a clinical dictionary object. This is used by subsequent functions
 #' to direct building and querying. For security reasons, this function and \code{\link{cc_from_home}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
-#' @param code_type Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT
+#' @param dict_type Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT
 #' @param json_file Location of JSON file containing options to use to create a clinical dictionary object
 #'
-#' Global options (* specifies required options)
-#'   type - specifies the database management system being used. Currently supported are mysql and sqlite [default])
-#'   dbname* - when mysql this specifies the database name; when sqlite specifies the location of the database file
-#'
-#  MySQL only options
-#'   user - database user
-#'   pass - database password
-#'   host - database host (default localhost)
-#'   port - database port (default 3306)
-#'
-#' @return
 #' @export
 #' @seealso \code{\link{cc_from_list}}, \code{\link{cc_from_home}}
 #' @examples
+#' \dontrun{
 #' dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json")
 #'
 #' #clinical dictionary object then passed to other functions
@@ -100,13 +85,13 @@ cc_from_list <- function(dict_type,options) {
 #'    "type":"sqlite"
 #'    "dbname":"/path/to/sqlitedb.sqlite"
 #'  }
-#'
+#'}
 #'
 cc_from_file<-function(dict_type, json_file) {
   if(!file.exists(json_file)) {
     stop(paste0("Dictionary config file '",json_file,"' does not exist"))
   }
-  json_data<-fromJSON(json_file)
+  json_data<-jsonlite::fromJSON(json_file)
   if(length(names(json_data))==0) {
     stop(paste0("Dictionary config file '",json_file,"' contains no options"))
   }
@@ -121,28 +106,19 @@ cc_from_file<-function(dict_type, json_file) {
 #'
 #' For security reasons, this function and \code{\link{cc_from_file}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
 #'
-#' Global options (* specifies required options)
-#'   type - specifies the database management system being used. Currently supported are mysql and sqlite [default])
-#'   dbname* - when mysql this specifies the database name; when sqlite specifies the location of the database file
-
-#  MySQL only options
-#'   user - database user
-#'   pass - database password
-#'   host - database host (default localhost)
-#'   port - database port (default 3306)
 #'
-#' @param dict_type
-#' @param options
+#' @param dict_type Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT
+#' @param filename  Name of JSON file in user's home directory containing options to use to create a clinical dictionary object
 #'
-#' @return
 #' @export
 #' @seealso \code{\link{cc_from_list}}, \code{\link{cc_from_file}}
 #' @examples
+#' \dontrun{
 #' dict<-cc_from_home("NHSReadV3","dictconfig.ini")
 #'
 #' #clinical dictionary object then passed to other functions
 #' ...
-#'
+#'}
 cc_from_home <- function(dict_type,filename) {
   home<-Sys.getenv('USERPROFILE')
 
@@ -161,14 +137,13 @@ cc_from_home <- function(dict_type,filename) {
 #' @param output_error When TRUE will output error message if is not available
 #'
 #' @return TRUE if connection is available
+#' @importFrom utils "capture.output"
 #' @export
-#'
-#' @examples
 cc_is_available<-function(dict,output_error=F)
 {
   avail <- tryCatch({
     dict$src
-    test <-capture.output(print(dict$src))
+    test <-utils::capture.output(print(dict$src))
     return(T)
   }, error = function(e) {
     if(cc_debug()) {
@@ -182,10 +157,7 @@ cc_is_available<-function(dict,output_error=F)
 #' Utility function to reconnect if clinical dictionary connection has timed out
 #'
 #' @param dict Clinical dictionary object
-#'
 #' @export
-#'
-#' @examples
 cc_reconnect<-function(dict)
 {
   classes<-class(dict)
@@ -199,11 +171,10 @@ cc_reconnect<-function(dict)
 #'
 #' @param value Boolean (T/F or TRUE/FALSE)
 #' @export
-#' @returns T if debugging is on
+#' @return TRUE if debugging is on
 #' @examples
-#'
 #' #switch debugging on
-#' cc_debug(T)
+#' cc_debug(TRUE)
 #'
 #' #log something if debugging is on
 #' if(cc_debug()) {
@@ -223,11 +194,7 @@ cc_debug<-function(value=NULL) {
 #' Utility function used to disconnect database connection
 #'
 #' @param dict Clinical dictionary object
-#'
-#' @return
 #' @export
-#'
-#' @examples
 cc_disconnect<-function(dict) {
-  dbDisconnect(dict$src)
+  DBI::dbDisconnect(dict$src)
 }

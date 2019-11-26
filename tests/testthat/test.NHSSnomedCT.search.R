@@ -1,6 +1,4 @@
-library(clinconcept)
-library(testthat)
-library(readr)
+skip_if_not(is_sqlite_available())
 dict<-setup_test_dict("NHSSnomedCT",F)
 context("SNOMED-CT search concepts function")
 test_that("search_concepts using snomed_code filters returns correct rows through dplyr",{

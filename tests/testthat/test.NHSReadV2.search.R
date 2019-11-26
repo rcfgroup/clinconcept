@@ -1,33 +1,25 @@
-library(clinconcept)
-library(testthat)
-library(readr)
-if(!is_sqlite_available()) {
-  return(NA)
-}
+skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
 dict<-setup_test_dict("NHSReadV2",F)
 context("READ V2 search concepts function")
 
 test_that("search_concepts using read_code filters returns correct rows through dplyr",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
-
   enable_case_sensitivity(dict)
 
-  obs_terms<-collect(search_concepts(dict,read_code=="H3..."))
+  obs_terms<-dplyr::collect(search_concepts(dict,read_code=="H3..."))
   expect_equal(nrow(obs_terms),1)
   expect_equal(obs_terms[1,]$term,"Chronic obstructive pulmonary disease")
 
-  obs_terms<-collect(search_concepts(dict,(read_code=="H3..." | read_code=="H31..")))
+  obs_terms<-dplyr::collect(search_concepts(dict,(read_code=="H3..." | read_code=="H31..")))
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[1,]$term,"Chronic obstructive pulmonary disease")
   expect_equal(obs_terms[2,]$term,"Chronic bronchitis")
 
-  obs_terms<-collect(search_concepts(dict,read_code %in% c("H3...","H32..")))
+  obs_terms<-dplyr::collect(search_concepts(dict,read_code %in% c("H3...","H32..")))
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[1,]$term,"Chronic obstructive pulmonary disease")
   expect_equal(obs_terms[2,]$term,"Emphysema")
 
-  obs_terms<-collect(search_concepts(dict,read_code %like% "H3%" & (!read_code=="H311.")))
+  obs_terms<-dplyr::collect(search_concepts(dict,read_code %like% "H3%" & (!read_code=="H311.")))
   expect_equal(nrow(obs_terms),100)
   expect_equal(obs_terms[1,]$term,"Chronic obstructive pulmonary disease")
   expect_equal(obs_terms[22,]$term,"Other chronic bronchitis")
@@ -35,25 +27,22 @@ test_that("search_concepts using read_code filters returns correct rows through 
 })
 
 test_that("search_concepts using terms returns correct rows through dplyr",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
-
   disable_case_sensitivity(dict)
-  obs_terms<-collect(search_concepts(dict,term=="Chronic obstructive airways disease NOS"))
+  obs_terms<-dplyr::collect(search_concepts(dict,term=="Chronic obstructive airways disease NOS"))
   expect_equal(nrow(obs_terms),1)
   expect_equal(obs_terms[1,]$read_code,"H3z..")
 
-  obs_terms<-collect(search_concepts(dict,term=="Chronic obstructive airways disease NOS" | term=="Chronic bronchitis"))
+  obs_terms<-dplyr::collect(search_concepts(dict,term=="Chronic obstructive airways disease NOS" | term=="Chronic bronchitis"))
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[1,]$read_code,"H31..")
   expect_equal(obs_terms[2,]$read_code,"H3z..")
 
-  obs_terms<-collect(search_concepts(dict,term %in% c("Chronic obstructive airways disease NOS","Emphysema")))
+  obs_terms<-dplyr::collect(search_concepts(dict,term %in% c("Chronic obstructive airways disease NOS","Emphysema")))
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[1,]$read_code,"H32..")
   expect_equal(obs_terms[2,]$read_code,"H3z..")
 
-  obs_terms<-collect(search_concepts(dict,term %like% "%chronic bronchitis%" & (!term %like% "purulent")))
+  obs_terms<-dplyr::collect(search_concepts(dict,term %like% "%chronic bronchitis%" & (!term %like% "purulent")))
   expect_equal(nrow(obs_terms),13)
   expect_equal(obs_terms[1,]$read_code,"H31..")
   expect_equal(obs_terms[1,]$term,"Chronic bronchitis")
@@ -62,9 +51,6 @@ test_that("search_concepts using terms returns correct rows through dplyr",{
 })
 
 test_that("search_concepts returns different vector outputs",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
-
   disable_case_sensitivity(dict)
   obs_codes<-search_concepts(dict,term=="Chronic obstructive pulmonary disease",output="codes")
   expect_equal(obs_codes,c("H3..."))

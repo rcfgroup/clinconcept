@@ -1,10 +1,4 @@
-library(clinconcept)
-library(testthat)
-library(readr)
-if(!is_sqlite_available()) {
-  return(NA)
-}
-
+skip_if_not(is_sqlite_available())
 dict<-setup_test_dict("NHSSnomedCT",T)
 
 context("SNOMED-CT parent code retrieval functions")

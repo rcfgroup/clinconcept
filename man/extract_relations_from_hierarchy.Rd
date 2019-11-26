@@ -16,9 +16,6 @@ extract_relations_from_hierarchy(dict, code, immediate_relations = F,
 
 \item{children}{T/F flag to return children (T) or parents (F)}
 }
-\value{
-
-}
 \description{
 Internal function used to get relations from a hierarchical dictionary such as READ v2 or ICD10
 }

@@ -17,16 +17,15 @@ write_table_from_file(src, table_name, filename, col_names = TRUE,
 
 \item{col_names}{Column names passed directly to readr::read_delim}
 
-\item{col_types}{Column types passed directly to dbWriteTable}
+\item{col_types}{Column types passed directly to DBI::dbWriteTable}
 
 \item{delim}{Field delimiter to use to read file passed directly to readr::read_delim}
 
 \item{file_col_types}{File column types passed directly to readr::read_delim}
 
 \item{header}{Column header parameter passed directly to dbWriteTable}
-}
-\value{
 
+\item{skip_rows}{Number of rows to skip (default = 0)}
 }
 \description{
 Wrapper function which simplifies reading a delimited file and writing it to a database table. Generally used with SQLite.

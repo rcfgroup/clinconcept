@@ -9,13 +9,16 @@ test_mysql(value = NULL)
 \arguments{
 \item{value}{Boolean (T/F or TRUE/FALSE)}
 }
+\value{
+TRUE if debugging is on
+}
 \description{
 Utility function which switches on/off mysql testing
 }
 \examples{
 
 #switch debugging on
-cc_debug(T)
+cc_debug(TRUE)
 
 #log something if debugging is on
 if(cc_debug()) {

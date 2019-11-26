@@ -19,7 +19,8 @@ get_child_codes(dict, code, immediate_children = F, current_only = T)
 Get child codes from the supplied clinical dictionary
 }
 \examples{
+\dontrun{
 dict<-cc_from_file("/path/to/dictconfig")
 h3_child_codes<-get_parent_codes(dict,"H31..",immediate_children=F)
-
+}
 }

@@ -25,11 +25,12 @@ Global options (* specifies required options)
 The preferred approach is to use \code{\link{cc_from_file}} as this is more secure.
 }
 \examples{
+\dontrun{
 dict<-cc_from_list(list(type="sqlite",dbname="/path/to/sqlitedb.sqlite"))
 
 #clinical dictionary object then passed to other functions
 ...
-
+}
 
 }
 \seealso{

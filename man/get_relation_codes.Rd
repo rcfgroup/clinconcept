@@ -8,11 +8,21 @@ get_relation_codes(src, rel_code, immediate_relations = F, children = T,
   tbl_name, code_field, parent_code_field, code_data_obj)
 }
 \arguments{
+\item{src}{dplyr src object}
+
 \item{rel_code}{Code to obtain relations for}
 
 \item{immediate_relations}{indicates if only one level (e.g. just immediate children) should be returned}
 
-\item{config}{rexceed config object (see new_config)}
+\item{children}{indicates if children should be returned}
+
+\item{tbl_name}{name of parent/child table to use}
+
+\item{code_field}{name of child code field in table}
+
+\item{parent_code_field}{name of parent code field in table}
+
+\item{code_data_obj}{a 'code_data' object instance which contains previously stored relations}
 }
 \value{
 Character vector containing relation codes (this excludes the code provided to the function)

@@ -11,26 +11,20 @@ To determine where the file will need to be placed in R you can execute: \code{S
 cc_from_home(dict_type, filename)
 }
 \arguments{
-\item{options}{}
+\item{dict_type}{Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT}
+
+\item{filename}{Name of JSON file in user's home directory containing options to use to create a clinical dictionary object}
 }
 \description{
 For security reasons, this function and \code{\link{cc_from_file}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
 }
-\details{
-Global options (* specifies required options)
-  type - specifies the database management system being used. Currently supported are mysql and sqlite [default])
-  dbname* - when mysql this specifies the database name; when sqlite specifies the location of the database file
-  user - database user
-  pass - database password
-  host - database host (default localhost)
-  port - database port (default 3306)
-}
 \examples{
+\dontrun{
 dict<-cc_from_home("NHSReadV3","dictconfig.ini")
 
 #clinical dictionary object then passed to other functions
 ...
-
+}
 }
 \seealso{
 \code{\link{cc_from_list}}, \code{\link{cc_from_file}}

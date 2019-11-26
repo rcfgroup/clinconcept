@@ -1,5 +1,3 @@
-library(dplyr)
-
 #' Search clinical codes in the specified dictionary using dplyr filter options
 #'
 #' @param dict dictionary object (see cc_from_list/cc_from_file)
@@ -9,44 +7,45 @@ library(dplyr)
 #' @return Depends on output parameter. Default is a dplyr::tbl which can undergo additional processing. Alternatives include a vector of terms or codes.
 #' @export
 #' @examples
+#'\dontrun{
 #' config<-cc_from_file("/path/to/dictconfig")
 #'
 #' #return all read codes containing 'asthma' and 'lung'
 #'
 #'  asthma_lung_codes<-search_concepts(config,term %like% "asthma" | term %like% "lung",include_synonyms=F)
-#
+#'}
 search_concepts<-function(dict, ..., include_synonyms=F,output="tbl") {
   UseMethod("search_concepts")
 }
 search_concepts.clinconcept<-function(dict, ..., output="tbl") {
   code_field<-get_ctable_code_field(dict);
   term_field<-get_ctable_term_field(dict);
-  read_tbl<-tbl(dict$src,get_ctable_name(dict))
+  read_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict))
   all_columns<-read_tbl$ops$vars
   sel_columns<-c(code_field,term_field)
   sel_columns<-c(sel_columns,setdiff(all_columns,sel_columns))
 
-  read_tbl<-select(read_tbl,sel_columns)
+  read_tbl<-dplyr::select(read_tbl,sel_columns)
   fcall<-match.call(expand.dots = T)
   search_concept_table(read_tbl,fcall,T,output)
 }
 
 search_concept_table<-function(tbl,fcall,include_synonyms,output) {
   if(include_synonyms==F) {
-    tbl<-filter(tbl,synonym=='0')
+    tbl<-dplyr::filter(tbl,synonym=='0')
   }
   fcall$.data<-tbl
-  fcall[[1]] <- filter
+  fcall[[1]] <- dplyr::filter
   fcall$dict<-NULL
   fcall$include_synonyms<-NULL
   fcall$output<-NULL
 
   concepts<-eval(fcall)
   if(output=="terms") {
-    return(collect(concepts)$term)
+    return(dplyr::collect(concepts)$term)
   }
   else if(output=="codes") {
-    codes<-collect(concepts)
+    codes<-dplyr::collect(concepts)
     return(unique(codes[[1]]))
   }
   else if(output=="tbl") {
@@ -61,20 +60,21 @@ search_concept_table<-function(tbl,fcall,include_synonyms,output) {
 #' @export
 #
 enable_case_sensitivity<-function(dict) {
-  if(!is(dict$src, "SQLiteConnection")) {
+  if(!methods::is(dict$src, "SQLiteConnection")) {
     return();
   }
-  dbExecute(dict$src,"pragma case_sensitive_like = yes")
+  DBI::dbExecute(dict$src,"pragma case_sensitive_like = yes")
 }
 
 #' Disable SQLite database query case-sensitivity
 #'
 #' @param dict dictionary object (see cc_from_list/cc_from_file)
+#' @importFrom methods "is" "new"
 #' @export
 #
 disable_case_sensitivity<-function(dict) {
-  if(!is(dict$src, "SQLiteConnection")) {
+  if(!methods::is(dict$src, "SQLiteConnection")) {
     return();
   }
-  dbExecute(dict$src,"pragma case_sensitive_like = no")
+  DBI::dbExecute(dict$src,"pragma case_sensitive_like = no")
 }

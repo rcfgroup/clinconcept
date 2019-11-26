@@ -1,8 +1,4 @@
-library(clinconcept)
-library(testthat)
-if(!is_sqlite_available()) {
-  return(NA)
-}
+skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
 exp_h3_readcodes<-c(".....","H....","X0003","XaBVJ")
 
 dict<-setup_test_dict("NHSReadV3",F)
@@ -10,8 +6,6 @@ dict<-setup_test_dict("NHSReadV3",F)
 context("READ V3 parent code retrieval functions")
 
 test_that("get_parent_codes returns all READ v3 ancestor codes when default parameters",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
   expect_parent_codes(dict,"H3...",exp_h3_readcodes)
   expect_parent_codes(dict,"H31..",c(".....", "H....", "X0003", "X104H", "X104d", "XaBVJ", "XaDtP"
   ))
@@ -19,8 +13,6 @@ test_that("get_parent_codes returns all READ v3 ancestor codes when default para
 })
 
 test_that("get_parent_codes returns filtered READ v3 ancestor codes when immediate_parents flag",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
   expect_parent_codes(dict,"H3...",c("H...."),immediate=T)
   expect_parent_codes(dict,"H31..",c("XaDtP"),immediate=T)
   expect_parent_codes(dict,"H32..",c("H...."),immediate=T)
@@ -28,8 +20,6 @@ test_that("get_parent_codes returns filtered READ v3 ancestor codes when immedia
 
 
 test_that("get_parent_codes returns filtered READ v3 descendent codes when current_only flag",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
   expect_parent_codes(dict,"H3...",c(".....", "H....", "X0003", "XaBVJ"),current=T)
   expect_parent_codes(dict,"H31..",c(".....", "H....", "X0003", "X104H", "X104d", "XaBVJ", "XaDtP"
   ),current=T)
@@ -37,8 +27,6 @@ test_that("get_parent_codes returns filtered READ v3 descendent codes when curre
 })
 
 test_that("get_parent_codes returns filtered READ v3 descendent codes when immediate_descendents and current_only flag",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
   expect_parent_codes(dict,"H3...",c("H...."),immediate=T)
   expect_parent_codes(dict,"H31..",c("XaDtP"),immediate=T)
   expect_parent_codes(dict,"H32..",c("H...."),immediate=T)

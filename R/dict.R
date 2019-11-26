@@ -5,8 +5,6 @@
 #'
 #' @return table name
 #' @export
-#'
-#' @examples
 get_ctable_name<-function(dict) {
   UseMethod("get_ctable_name");
 }
@@ -17,8 +15,6 @@ get_ctable_name<-function(dict) {
 #'
 #' @return code field name
 #' @export
-#'
-#' @examples
 get_ctable_code_field<-function(dict) {
   UseMethod("get_ctable_code_field");
 }
@@ -29,8 +25,6 @@ get_ctable_code_field<-function(dict) {
 #'
 #' @return term field name
 #' @export
-#'
-#' @examples
 get_ctable_term_field<-function(dict) {
   UseMethod("get_ctable_term_field");
 }
@@ -41,8 +35,6 @@ get_ctable_term_field<-function(dict) {
 #'
 #' @return table name
 #' @export
-#'
-#' @examples
 get_ptable_name<-function(dict) {
   UseMethod("get_ptable_name");
 }
@@ -53,8 +45,6 @@ get_ptable_name<-function(dict) {
 #'
 #' @return code field name
 #' @export
-#'
-#' @examples
 get_ptable_code_field<-function(dict) {
   UseMethod("get_ptable_code_field");
 }
@@ -64,8 +54,6 @@ get_ptable_code_field<-function(dict) {
 #'
 #' @return parent code field name
 #' @export
-#'
-#' @examples
 get_ptable_parent_field<-function(dict) {
   UseMethod("get_ptable_parent_field");
 }
@@ -76,20 +64,24 @@ get_ptable_parent_field<-function(dict) {
 #' @param code Clinical code to check
 #'
 #' @return TRUE if present, FALSE if not
+#' @importFrom magrittr "%>%"
+#' @importFrom rlang ".data"
 #' @export
 #'
 #' @examples
+#'\dontrun{
 #' dict<-cc_from_file("/path/to/dictconfig")
 #' h3_child_codes<-get_parent_codes(dict,"H31..",immediate_children=F)
-#'
+#'}
 is_code_present<-function(dict,code) {
   UseMethod("is_code_present")
 }
 
+
 is_code_present.clinconcept<-function(dict,code) {
-  code_tbl <- dict$src %>% tbl(get_ctable_name(dict));
-  fct<-paste0("filter(code_tbl,",get_ctable_code_field(dict)," == code)")
+  code_tbl <- dict$src %>% dplyr::tbl(get_ctable_name(dict));
+  fct<-paste0("dplyr::filter(code_tbl,",get_ctable_code_field(dict)," == code)")
   code_tbl<-eval(parse(text=fct))
-  codes<-code_tbl %>% count() %>% collect()
+  codes<-code_tbl %>% dplyr::count() %>% dplyr::collect()
   codes$n>0
 }

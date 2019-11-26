@@ -20,7 +20,8 @@ data.frame of child/parent codes
 Get child/parent pairs in a data.frame for a specific code
 }
 \examples{
+\dontrun{
 dict<-cc_from_file("/path/to/dictconfig")
 h3_rels<-get_relationships(dict,"H31..",children=F)
-
+}
 }

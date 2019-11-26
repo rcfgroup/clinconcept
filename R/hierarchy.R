@@ -1,5 +1,4 @@
-library(dplyr)
-library(magrittr)
+#' @importFrom methods setRefClass
 setRefClass("code_data",fields=list(relations="vector",last_relations="vector",relations_by_code="list"))
 
 #' Get parent codes from the supplied clinical dictionary
@@ -9,13 +8,14 @@ setRefClass("code_data",fields=list(relations="vector",last_relations="vector",r
 #' @param immediate_parents T/F flag to return only parents from only the level above (default FALSE)
 #' @param current_only T/F flag to return only current or active codes (default TRUE)
 #'
-#' @return
 #' @export
 #'
 #' @examples
+#'\dontrun{
 #' dict<-cc_from_file("/path/to/dictconfig")
 #' h3_parent_codes<-get_parent_codes(dict,"H3...",immediate_parents=F)
 #'
+#'}
 get_parent_codes<-function(dict,code,immediate_parents=F,current_only=T) {
   UseMethod("get_parent_codes")
 }
@@ -26,13 +26,13 @@ get_parent_codes<-function(dict,code,immediate_parents=F,current_only=T) {
 #' @param immediate_children T/F flag to return only children from the first level below (default FALSE)
 #' @param current_only T/F flag to return only current or active codes (default TRUE)
 #'
-#' @return
 #' @export
 #'
 #' @examples
+#'\dontrun{
 #' dict<-cc_from_file("/path/to/dictconfig")
 #' h3_child_codes<-get_parent_codes(dict,"H31..",immediate_children=F)
-#'
+#'}
 get_child_codes<-function(dict,code,immediate_children=F,current_only=T) {
   UseMethod("get_child_codes")
 }
@@ -47,15 +47,16 @@ get_child_codes<-function(dict,code,immediate_children=F,current_only=T) {
 #' @export
 #'
 #' @examples
+#'\dontrun{
 #' dict<-cc_from_file("/path/to/dictconfig")
 #' h3_rels<-get_relationships(dict,"H31..",children=F)
-#'
+#'}
 get_relationships<-function(dict,code,children) {
   UseMethod("get_relationships")
 }
 
 fetch_relation_codes<-function(src,rel_code,tbl_name, code_field, parent_code_field,children=T) {
-  rel_tbl<-tbl(src,tbl_name) %>% select(c(code_field,parent_code_field))
+  rel_tbl<-dplyr::tbl(src,tbl_name) %>% dplyr::select(c(code_field,parent_code_field))
 
   if(children) {
     option_str<-paste0(parent_code_field,"== rel_code");
@@ -66,7 +67,7 @@ fetch_relation_codes<-function(src,rel_code,tbl_name, code_field, parent_code_fi
 
   rel_tbl<-eval(parse(text = paste0("filter(rel_tbl,", option_str, ")")))
 
-  relation_rows<-collect(rel_tbl)
+  relation_rows<-dplyr::collect(rel_tbl)
   if(nrow(relation_rows)==0) {
     return(NULL);
   }
@@ -82,9 +83,14 @@ fetch_relation_codes<-function(src,rel_code,tbl_name, code_field, parent_code_fi
 }
 #' Internal recursive function used to get all relation codes from the database (called explicitly by get_child_codes)
 #'
-#' @param config rexceed config object (see new_config)
+#' @param src dplyr src object
 #' @param rel_code Code to obtain relations for
 #' @param immediate_relations indicates if only one level (e.g. just immediate children) should be returned
+#' @param children indicates if children should be returned
+#' @param tbl_name name of parent/child table to use
+#' @param code_field name of child code field in table
+#' @param parent_code_field name of parent code field in table
+#' @param code_data_obj a 'code_data' object instance which contains previously stored relations
 #' @return Character vector containing relation codes (this excludes the code provided to the function)
 #
 get_relation_codes<-function(src,rel_code,immediate_relations=F,children=T,tbl_name,code_field,parent_code_field,code_data_obj) {
@@ -123,11 +129,9 @@ get_relation_codes<-function(src,rel_code,immediate_relations=F,children=T,tbl_n
 #' @param code Code to use a basis for relationship extraction
 #' @param immediate_relations T/F flag to return just immediate relations or all relations
 #' @param children T/F flag to return children (T) or parents (F)
-#'
-#' @return
-#'
+#' @importFrom methods "new"
 extract_relations_from_dag<-function(dict,code,immediate_relations,children){
-  code_data<-new("code_data")
+  code_data<-methods::new("code_data")
   get_relation_codes(dict$src,code,immediate_relations,get_ptable_name(dict),code_field=get_ptable_code_field(dict),parent_code_field=get_ptable_parent_field(dict),children=children, code_data_obj=code_data);
 
   rel_codes<-code_data$relations
@@ -194,8 +198,6 @@ create_query_params_for_parents_from_hierarchy<-function(code,immediate=F) {
 #' @param code Code to search
 #'
 #' @return An integer specifying the location of the first dot
-#'
-#' @examples
 get_dot_position<-function(code) {
   #obtain positions of dots in parent_code
   bits<-lapply(strsplit(code, ''), function(x) which(x == '.'))
@@ -212,8 +214,6 @@ get_dot_position<-function(code) {
 #' @param immediate_relations T/F flag to return just immediate relations or all relations
 #' @param children T/F flag to return children (T) or parents (F)
 #'
-#' @return
-#'
 extract_relations_from_hierarchy<-function(dict,code,immediate_relations=F,children=T) {
   if(!is_code_present(dict,code)) {
     stop(paste0("Code '",code,"' is not present"))
@@ -224,7 +224,7 @@ extract_relations_from_hierarchy<-function(dict,code,immediate_relations=F,child
   else {
     params<-create_query_params_for_parents_from_hierarchy(code,immediate_relations)
   }
-  codes<-tbl(dict$src,get_ctable_name(dict))
+  codes<-dplyr::tbl(dict$src,get_ctable_name(dict))
   if(cc_debug()) {
     print(paste("params",params))
   }
