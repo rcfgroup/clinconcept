@@ -4,7 +4,7 @@ name: master
 
 jobs:
   macOS:
-    runs-on: macOS-latest
+    runs-on: macos-latest
     strategy:
       matrix:
         r: ['3.6']
@@ -52,7 +52,10 @@ jobs:
         run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error')"
 
   windows:
-    runs-on: ['latest']
+    runs-on: ['windows-latest']
+    strategy:
+      matrix:
+        r: ['3.6']
     steps:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
