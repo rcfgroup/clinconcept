@@ -14,18 +14,14 @@ build_concept_tables.sqlite.NHSReadV2 <- function(dict,replacements) {
   DBI::dbWriteTable(dict$src,"read_version2",read2)
 }
 
-get_child_codes.NHSReadV2<-function(dict,code,immediate_children=F,current_only=F) {
+get_child_codes.NHSReadV2<-function(dict,code,immediate_children=F,active_only=F) {
   children<-dplyr::collect(extract_relations_from_hierarchy(dict,code,immediate_relations=immediate_children,children=T))
   children$read_code
 }
-get_parent_codes.NHSReadV2<-function(dict,code,immediate_parents=F,current_only=F) {
+get_parent_codes.NHSReadV2<-function(dict,code,immediate_parents=F,active_only=F) {
   data<-dplyr::collect(extract_relations_from_hierarchy(dict,code,immediate_relations=immediate_parents,children=F))
   data$read_code
 }
-get_relationships.NHSReadV2<-function(dict,code,children) {
-  relations<-extract_relations_from_hierarchy(dict,code,immediate_relations=F,children=children)
-  #%>% select(c("read_code")) %>% collapse()
-  #parents<-substr(relations$read_code,0,1)
-  #relations<-cbind(relations,parent_read_code=parents)
-  #relations
-}
+# get_relationships.NHSReadV2<-function(dict,code,children) {
+#   extract_relations_from_hierarchy(dict,code,immediate_relations=F,children=children)
+# }

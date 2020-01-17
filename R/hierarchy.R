@@ -6,7 +6,7 @@ setRefClass("code_data",fields=list(relations="vector",last_relations="vector",r
 #' @param dict Clinical dictionary object
 #' @param code Clinical code to get parent codes for
 #' @param immediate_parents T/F flag to return only parents from only the level above (default FALSE)
-#' @param current_only T/F flag to return only current or active codes (default TRUE)
+#' @param active_only T/F flag to return only active codes (default TRUE)
 #'
 #' @export
 #'
@@ -16,7 +16,7 @@ setRefClass("code_data",fields=list(relations="vector",last_relations="vector",r
 #' h3_parent_codes<-get_parent_codes(dict,"H3...",immediate_parents=F)
 #'
 #'}
-get_parent_codes<-function(dict,code,immediate_parents=F,current_only=T) {
+get_parent_codes<-function(dict,code,immediate_parents=F,active_only=T) {
   UseMethod("get_parent_codes")
 }
 #' Get child codes from the supplied clinical dictionary
@@ -24,7 +24,7 @@ get_parent_codes<-function(dict,code,immediate_parents=F,current_only=T) {
 #' @param dict Clinical dictionary object
 #' @param code Clinical code to get child codes for
 #' @param immediate_children T/F flag to return only children from the first level below (default FALSE)
-#' @param current_only T/F flag to return only current or active codes (default TRUE)
+#' @param active_only T/F flag to return only active codes (default TRUE)
 #'
 #' @export
 #'
@@ -33,7 +33,7 @@ get_parent_codes<-function(dict,code,immediate_parents=F,current_only=T) {
 #' dict<-cc_from_file("/path/to/dictconfig")
 #' h3_child_codes<-get_parent_codes(dict,"H31..",immediate_children=F)
 #'}
-get_child_codes<-function(dict,code,immediate_children=F,current_only=T) {
+get_child_codes<-function(dict,code,immediate_children=F,active_only=T) {
   UseMethod("get_child_codes")
 }
 

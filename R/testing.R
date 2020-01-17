@@ -35,19 +35,19 @@ cleanup_test_dict<-function(dict) {
   unlink(paste0(test_path,paste0("/test_",dict_type,".sqlite")))
 }
 
-expect_child_codes<-function(dict,code,exp_child_codes, immediate=F, current=F) {
-  obs_child_codes<-get_child_codes(dict,code,immediate_children=immediate,current_only=current)
+expect_child_codes<-function(dict,code,exp_child_codes, immediate=F, active=F) {
+  obs_child_codes<-get_child_codes(dict,code,immediate_children=immediate,active_only=active)
   if(cc_debug()) {
-    print(paste("obs code",code,"current=",current,"immediate=",immediate,paste(sort(obs_child_codes),collapse=",")))
-    print(paste("exp code",code,"current=",current,"immediate=",immediate,paste(sort(exp_child_codes),collapse=",")))
+    print(paste("obs code",code,"active=",active,"immediate=",immediate,paste(sort(obs_child_codes),collapse=",")))
+    print(paste("exp code",code,"active=",active,"immediate=",immediate,paste(sort(exp_child_codes),collapse=",")))
   }
   testthat::expect_equal(sort(obs_child_codes),sort(exp_child_codes))
 }
-expect_parent_codes<-function(dict,code,exp_parent_codes, immediate=F, current=F) {
-  obs_parent_codes<-get_parent_codes(dict,code,immediate_parents=immediate,current_only=current)
+expect_parent_codes<-function(dict,code,exp_parent_codes, immediate=F, active=F) {
+  obs_parent_codes<-get_parent_codes(dict,code,immediate_parents=immediate,active_only=active)
   if(cc_debug()) {
-    print(paste("obs code",code,"current=",current,"immediate=",immediate,paste(sort(obs_parent_codes),collapse=",")))
-    print(paste("exp code",code,"current=",current,"immediate=",immediate,paste(sort(exp_parent_codes),collapse=",")))
+    print(paste("obs code",code,"active=",active,"immediate=",immediate,paste(sort(obs_parent_codes),collapse=",")))
+    print(paste("exp code",code,"active=",active,"immediate=",immediate,paste(sort(exp_parent_codes),collapse=",")))
   }
   testthat::expect_equal(sort(obs_parent_codes),sort(exp_parent_codes))
 }

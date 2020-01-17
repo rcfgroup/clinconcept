@@ -27,16 +27,16 @@ test_that("get_child_codes returns filtered READ v3 descendent codes when immedi
 
 test_that("get_child_codes returns filtered READ v3 descendent codes when current_only flag",{
   expect_child_codes(dict,"H3...",c("H3122", "H4641", "X101l", "X101m", "X102z", "Xa35l", "XaIND",
-                                    "XaZd1"),current=T)
-  expect_child_codes(dict,"H31..",c("H310.","H3122","H31y1","X101j","X101k","Xa35l","XaZd1","XE0YM"),current=T)
+                                    "XaZd1"),active=T)
+  expect_child_codes(dict,"H31..",c("H310.","H3122","H31y1","X101j","X101k","Xa35l","XaZd1","XE0YM"),active=T)
   expect_child_codes(dict,"H32..",c("H320.", "H321.", "H322.", "H32y2", "H582.", "X101n", "X101o",
-                                   "X101p", "X101q", "X101r", "XaIQg"),current=T)
+                                   "X101p", "X101q", "X101r", "XaIQg"),active=T)
 })
 
 test_that("get_child_codes returns filtered READ v3 descendent codes when immediate_children and current_only flag",{
-  expect_child_codes(dict,"H3...",c("H3122", "X101l", "XaIND"),immediate=T,current=T)
-  expect_child_codes(dict,"H31..",c("H310.", "H3122", "H31y1", "X101j", "XE0YM"),immediate=T,current=T)
-  expect_child_codes(dict,"H32..",c("H321.", "H322.", "H32y2", "X101n"),immediate=T,current=T)
+  expect_child_codes(dict,"H3...",c("H3122", "X101l", "XaIND"),immediate=T,active=T)
+  expect_child_codes(dict,"H31..",c("H310.", "H3122", "H31y1", "X101j", "XE0YM"),immediate=T,active=T)
+  expect_child_codes(dict,"H32..",c("H321.", "H322.", "H32y2", "X101n"),immediate=T,active=T)
 })
 
 testthat::teardown(cleanup_test_dict(dict))

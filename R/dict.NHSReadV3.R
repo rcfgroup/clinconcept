@@ -27,27 +27,27 @@ build_concept_tables.sqlite.NHSReadV3 <- function(dict,replacements) {
   write_table_from_file(sqlite,"read_parents_version3",paste0(data_file_path,"/V3/V3Hier.v3"),parents_fields,parents_types,delim="|")
 }
 
-get_child_codes.NHSReadV3<-function(dict,code,immediate_children=F,current_only=F) {
+get_child_codes.NHSReadV3<-function(dict,code,immediate_children=F,active_only=F) {
   codes<-extract_relations_from_dag(dict,code,immediate_children,children=T)
-  if(current_only) {
+  if(active_only) {
     code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(read_code %in% codes & status=='C') %>% dplyr::collect()
     return(unique(code_tbl$read_code))
   }
   codes
 }
-get_parent_codes.NHSReadV3<-function(dict,code,immediate_parents=F,current_only=F) {
+get_parent_codes.NHSReadV3<-function(dict,code,immediate_parents=F,active_only=F) {
   codes<-extract_relations_from_dag(dict,code,immediate_parents,children=F)
 
-  if(current_only) {
+  if(active_only) {
     code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(read_code %in% codes & status=='C') %>% dplyr::collect()
     return(unique(code_tbl$read_code))
   }
   codes
 }
 
-get_relationships.NHSReadV3<-function(dict,code,children) {
-  dplyr::collect(extract_relations_from_dag(dict,code,immediate_relations=F,children=children))
-}
+# get_relationships.NHSReadV3<-function(dict,code,children) {
+#   dplyr::collect(extract_relations_from_dag(dict,code,immediate_relations=F,children=children))
+# }
 
 # ' @importFrom rlang .data
 

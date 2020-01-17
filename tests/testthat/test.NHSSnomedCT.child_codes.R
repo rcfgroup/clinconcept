@@ -23,7 +23,7 @@ test_that("get_child_codes returns filtered SNOMED-CT descendent codes when imme
 })
 
 test_that("get_child_codes returns filtered SNOMED-CT descendent codes when current_only flag",{
-  expect_child_codes(dict,"30352005",c("703954005","703953004"),current=T)
+  expect_child_codes(dict,"30352005",c("703954005","703953004"),active=T)
 
 })
 
