@@ -10,11 +10,14 @@ Description: The package provides tools to build/load a database with one or mor
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Suggests: 
+Suggests:
   testthat,
-  RMySQL (>= 0.10)
+  RMySQL (>= 0.10),
+    knitr,
+    rmarkdown
 Imports:
   dplyr (>= 0.7),
+  dbplyr (>= 1.4.0),
   RSQLite (>= 2.0),
   jsonlite (>= 1.4),
   readr (>= 1.1),
@@ -23,3 +26,4 @@ Imports:
   rlang,
   DBI
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr

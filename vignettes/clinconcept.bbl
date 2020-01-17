@@ -1,0 +1,49 @@
+\begin{thebibliography}{5}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{{International Health Terminology Standards Development Organisation
+  (IHTSDO)}(2010)}]{SNOMED:2010}
+{International Health Terminology Standards Development Organisation (IHTSDO)}
+  (2010).
+\newblock \enquote{{SNOMED Clinical Terms User Guide}.}
+\newblock \emph{Development}, (January), 99.
+
+\bibitem[{Olier \emph{et~al.}(2016)Olier, Springate, Ashcroft, Doran, Reeves,
+  Planner, Reilly, and Kontopantelis}]{rpcdsearch:2016}
+Olier I, Springate DA, Ashcroft DM, Doran T, Reeves D, Planner C, Reilly S,
+  Kontopantelis E (2016).
+\newblock \enquote{Modelling Conditions and Health Care Processes in Electronic
+  Health Records: An Application to Severe Mental Illness with the Clinical
+  Practice Research Datalink.}
+\newblock \emph{PLOS ONE}, \textbf{11}(2), e0146715.
+\newblock ISSN 1932-6203.
+\newblock \doi{10.1371/journal.pone.0146715}.
+
+\bibitem[{O'Neil \emph{et~al.}(1995)O'Neil, Payne, and Read}]{ONeil:1995}
+O'Neil M, Payne C, Read J (1995).
+\newblock \enquote{{Read Codes Version 3: a user led terminology.}}
+\newblock \emph{Methods of information in medicine}, \textbf{34}(1-2), 187--92.
+\newblock ISSN 0026-1270.
+\newblock \urlprefix\url{http://www.ncbi.nlm.nih.gov/pubmed/9082130}.
+
+\bibitem[{{\proglang{R} Core Team}(2017)}]{R}
+{\proglang{R} Core Team} (2017).
+\newblock \emph{\proglang{R}: {A} Language and Environment for Statistical
+  Computing}.
+\newblock \proglang{R} Foundation for Statistical Computing, Vienna, Austria.
+\newblock \urlprefix\url{https://www.R-project.org/}.
+
+\bibitem[{WHO(2017)}]{ICD10:2017}
+WHO (2017).
+\newblock \emph{{Classification of Diseases (ICD)}}.
+\newblock \urlprefix\url{http://www.who.int/classifications/icd/en/}.
+
+\end{thebibliography}
