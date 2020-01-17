@@ -65,7 +65,7 @@ fetch_relation_codes<-function(src,rel_code,tbl_name, code_field, parent_code_fi
     option_str<-paste0(code_field,"== rel_code");
   }
 
-  rel_tbl<-eval(parse(text = paste0("filter(rel_tbl,", option_str, ")")))
+  rel_tbl<-eval(parse(text = paste0("dplyr::filter(rel_tbl,", option_str, ")")))
 
   relation_rows<-dplyr::collect(rel_tbl)
   if(nrow(relation_rows)==0) {
@@ -230,7 +230,7 @@ extract_relations_from_hierarchy<-function(dict,code,immediate_relations=F,child
   }
   rels<-params$value
 
-  data<-eval(parse(text = paste("filter(codes,",get_ctable_code_field(dict),params$op,"rels &",get_ctable_code_field(dict)," != code)")))
+  data<-eval(parse(text = paste("dplyr::filter(codes,",get_ctable_code_field(dict),params$op,"rels &",get_ctable_code_field(dict)," != code)")))
 
   data
 }

@@ -1,6 +1,12 @@
 skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-dict<-setup_test_dict("NHSReadV3",F)
-context("READ V3 search concepts function")
+
+
+setup_dict<-function() {
+  context("READ V3 search concepts function")
+  setup_test_dict("NHSReadV3",T)
+}
+
+dict<-testthat::setup(setup_dict())
 
 test_that("search_concepts using read_code filters returns correct rows through dplyr",{
   enable_case_sensitivity(dict)
@@ -30,21 +36,21 @@ test_that("search_concepts using read_code filters returns correct rows through 
 test_that("search_concepts using terms returns correct rows through dplyr",{
 
   disable_case_sensitivity(dict)
-  obs_terms<-collect(search_concepts(dict,term=="Chronic obstructive lung disease"))
+  obs_terms<-dplyr::collect(search_concepts(dict,term=="Chronic obstructive lung disease"))
   expect_equal(nrow(obs_terms),1)
   expect_equal(obs_terms[1,]$read_code,"H3...")
 
-  obs_terms<-collect(search_concepts(dict,term=="Chronic obstructive lung disease" | term=="Chronic bronchitis"))
+  obs_terms<-dplyr::collect(search_concepts(dict,term=="Chronic obstructive lung disease" | term=="Chronic bronchitis"))
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[1,]$read_code,"H3...")
   expect_equal(obs_terms[2,]$read_code,"H31..")
 
-  obs_terms<-collect(search_concepts(dict,term %in% c("Chronic obstructive lung disease","Emphysema")))
+  obs_terms<-dplyr::collect(search_concepts(dict,term %in% c("Chronic obstructive lung disease","Emphysema")))
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[1,]$read_code,"H3...")
   expect_equal(obs_terms[2,]$read_code,"H32..")
 
-  obs_terms<-collect(arrange(search_concepts(dict,term %like% "%chronic bronchitis%" & (!term=="Chronic bronchitis")),read_code))
+  obs_terms<-dplyr::collect(dplyr::arrange(search_concepts(dict,term %like% "%chronic bronchitis%" & (!term=="Chronic bronchitis")),read_code))
 
   expect_equal(nrow(obs_terms),13)
   expect_equal(obs_terms[1,]$read_code,"H3...")
@@ -73,11 +79,11 @@ test_that("search_concepts returns different vector outputs",{
 test_that("search_concepts with include_synonyms returns correct data",{
   enable_case_sensitivity(dict)
 
-  obs_rows<-collect(search_concepts(dict,read_code=="H3...",include_synonyms=T))
+  obs_rows<-dplyr::collect(search_concepts(dict,read_code=="H3...",include_synonyms=T))
   expect_equal(nrow(obs_rows),17)
   expect_equal(obs_rows[1,]$term,"Chronic obstructive lung disease")
 
-  obs_rows<-collect(search_concepts(dict,term %like% "%airway%",include_synonyms=T))
+  obs_rows<-dplyr::collect(search_concepts(dict,term %like% "%airway%",include_synonyms=T))
   expect_equal(nrow(obs_rows),10)
 
   obs_codes<-search_concepts(dict,term %like% "%airway%",output="codes",include_synonyms=T)
@@ -89,6 +95,6 @@ test_that("search_concepts with include_synonyms returns correct data",{
   expect_equal(obs_terms[1],"Chronic obstructive lung disease")
 })
 
-cleanup_test_dict(dict)
+testthat::teardown(cleanup_test_dict(dict))
 
 

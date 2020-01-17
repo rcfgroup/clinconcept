@@ -3,9 +3,13 @@ exp_h3_readcodes<-c("H3122", "H312z", "H3y..", "H3y0.", "H3z..", "H4641", "Hyu31
                     "X101i", "X101l", "X101m", "X102z", "Xa35l", "XaEIV", "XaEIW",
                     "XaEIY", "XaIND", "XaN4a", "XaZd1")
 
-dict<-setup_test_dict("NHSReadV3",T)
+setup_dict<-function() {
+  context("READ V3 child code retrieval functions")
+  dict<-setup_test_dict("NHSReadV3",T)
+  dict
+}
 
-context("READ V3 child code retrieval functions")
+dict<-testthat::setup(setup_dict())
 
 test_that("get_child_codes returns all READ v3 descendent codes when default parameters",{
   expect_child_codes(dict,"H3...",exp_h3_readcodes)
@@ -35,6 +39,5 @@ test_that("get_child_codes returns filtered READ v3 descendent codes when immedi
   expect_child_codes(dict,"H32..",c("H321.", "H322.", "H32y2", "X101n"),immediate=T,current=T)
 })
 
-cc_disconnect(dict)
-
+testthat::teardown(cleanup_test_dict(dict))
 

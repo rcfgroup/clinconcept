@@ -14,7 +14,7 @@ setup_test_dict<-function(dict_type,force_create=F) {
     db_path<-paste0(test_path,"/test_",dict_type,".sqlite")
 
     dict<-cc_from_list(dict_type,list(type="sqlite",dbname=db_path))
-    dict$sql_path=system.file("sql")
+    dict$sql_path=system.file("sql", package="clinconcept")
 
     if(!file.exists(db_path) | force_create) {
       build_concept_tables(dict,system.file("test_data",dict_type, package="clinconcept"))

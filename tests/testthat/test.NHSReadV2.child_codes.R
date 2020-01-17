@@ -15,7 +15,7 @@ exp_h2_readcodes<-c("H30..", "H300.", "H301.", "H302.", "H30z.", "H31..", "H310.
                     "H37..", "H38..", "H39..", "H3A..", "H3B..", "H3y..", "H3y0.",
                     "H3y1.", "H3z..");
 
-dict<-setup_test_dict("NHSReadV2",T)
+dict<-testthat::setup(setup_test_dict("NHSReadV2",T))
 
 context("READ V2 child code retrieval functions")
 
@@ -34,6 +34,4 @@ test_that("get_child_codes returns filtered READ V2 descendent codes when immedi
   expect_child_codes(dict,"H32..",c("H320.", "H321.", "H322.", "H32y.", "H32z."),immediate=T)
 })
 
-cc_disconnect(dict)
-#remove_test_dict(dict)
-
+testthat::teardown(cleanup_test_dict(dict))

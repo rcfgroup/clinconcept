@@ -30,7 +30,7 @@ build_concept_tables.sqlite.NHSReadV3 <- function(dict,replacements) {
 get_child_codes.NHSReadV3<-function(dict,code,immediate_children=F,current_only=F) {
   codes<-extract_relations_from_dag(dict,code,immediate_children,children=T)
   if(current_only) {
-    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(code %in% codes & status=='C') %>% dplyr::collect()
+    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(read_code %in% codes & status=='C') %>% dplyr::collect()
     return(unique(code_tbl$read_code))
   }
   codes
@@ -39,7 +39,7 @@ get_parent_codes.NHSReadV3<-function(dict,code,immediate_parents=F,current_only=
   codes<-extract_relations_from_dag(dict,code,immediate_parents,children=F)
 
   if(current_only) {
-    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(code %in% codes & status=='C') %>% dplyr::collect()
+    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(read_code %in% codes & status=='C') %>% dplyr::collect()
     return(unique(code_tbl$read_code))
   }
   codes
