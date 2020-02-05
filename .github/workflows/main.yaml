@@ -1,6 +1,6 @@
 on: [push, pull_request]
 
-name: master
+name: main
 
 jobs:
   linux:
@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-tinytex@master
       - name: Install system dependencies
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
