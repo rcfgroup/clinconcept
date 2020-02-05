@@ -4,7 +4,7 @@
 \alias{get_parent_codes}
 \title{Get parent codes from the supplied clinical dictionary}
 \usage{
-get_parent_codes(dict, code, immediate_parents = F, current_only = T)
+get_parent_codes(dict, code, immediate_parents = F, active_only = T)
 }
 \arguments{
 \item{dict}{Clinical dictionary object}
@@ -13,7 +13,7 @@ get_parent_codes(dict, code, immediate_parents = F, current_only = T)
 
 \item{immediate_parents}{T/F flag to return only parents from only the level above (default FALSE)}
 
-\item{current_only}{T/F flag to return only current or active codes (default TRUE)}
+\item{active_only}{T/F flag to return only active codes (default TRUE)}
 }
 \description{
 Get parent codes from the supplied clinical dictionary

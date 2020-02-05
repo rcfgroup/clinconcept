@@ -4,7 +4,7 @@
 \alias{get_child_codes}
 \title{Get child codes from the supplied clinical dictionary}
 \usage{
-get_child_codes(dict, code, immediate_children = F, current_only = T)
+get_child_codes(dict, code, immediate_children = F, active_only = T)
 }
 \arguments{
 \item{dict}{Clinical dictionary object}
@@ -13,7 +13,7 @@ get_child_codes(dict, code, immediate_children = F, current_only = T)
 
 \item{immediate_children}{T/F flag to return only children from the first level below (default FALSE)}
 
-\item{current_only}{T/F flag to return only current or active codes (default TRUE)}
+\item{active_only}{T/F flag to return only active codes (default TRUE)}
 }
 \description{
 Get child codes from the supplied clinical dictionary

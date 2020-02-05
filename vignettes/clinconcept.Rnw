@@ -1,3 +1,6 @@
+%\VignetteBuilder{knitr}
+%\VignetteIndexEntry{clinconcept}
+
 \documentclass[shortnames,nojss]{jss}
 
 %% -- LaTeX packages and custom commands ---------------------------------------
