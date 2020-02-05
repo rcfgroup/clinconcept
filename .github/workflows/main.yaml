@@ -13,7 +13,7 @@ jobs:
       CRAN: 'https://demo.rstudiopm.com/all/__linux__/xenial/latest'
     steps:
       - name: Update apt-get
-        run: apt-get install texinfo
+        run: apt-get update
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
