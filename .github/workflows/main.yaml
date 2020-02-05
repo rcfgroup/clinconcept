@@ -18,7 +18,7 @@ jobs:
           R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
         run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual')"
+        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual --no-build-vignettes')"
       - name: Test coverage
         if: matrix.r == '3.6'
         run: |
@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: Rscript -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
-        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual')"
+        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual --no-build-vignettes')"
 
   windows:
     runs-on: ['windows-latest']
@@ -58,4 +58,4 @@ jobs:
       - name: Install dependencies
         run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual')"
+        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual --no-build-vignettes')"
