@@ -19,15 +19,11 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          apt-get update
-          apt-get install dialog apt-utils -y
-          echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-          apt-get install texlive-base -q -y
           Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           eval "$sysreqs"
       - name: Install dependencies
         run: Rscript -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
-        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual --no-build-vignettes')"
+        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', build_args='--no-build-vignettes', args='--no-manual --no-build-vignettes --ignore-vignettes')"
 
