@@ -194,7 +194,10 @@ cc_debug<-function(value=NULL) {
 #' Utility function used to disconnect database connection
 #'
 #' @param dict Clinical dictionary object
+#' @importFrom dbplyr sql
+
 #' @export
 cc_disconnect<-function(dict) {
   DBI::dbDisconnect(dict$src)
+  dbplyr::sql()
 }
