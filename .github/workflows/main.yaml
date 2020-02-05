@@ -21,6 +21,7 @@ jobs:
         run: |
           apt-get update
           apt-get install dialog apt-utils -y
+          echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
           apt-get install texlive-base -q -y
           Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
