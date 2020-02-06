@@ -22,8 +22,21 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
+          apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D6BC243565B2087BC3F897C9277A7293F59E4889
+          echo "deb http://miktex.org/download/ubuntu xenial universe" | sudo tee /etc/apt/sources.list.d/miktex.list
+          apt-get update
+          apt-get install miktex -y -q
+          miktexsetup --shared=yes finish
           tlmgr install ae
           tlmgr install thumbpdf
+          tlmgr install setspace
+          tlmgr install pbox
+          tlmgr install float
+          tlmgr install epstopdf
+          tlmgr install infwarerr
+          tlmgr install grfext
+          tlmgr install kvoptions
+          tlmgr install pdftexcmds
           Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           eval "$sysreqs"
