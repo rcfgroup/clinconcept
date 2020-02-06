@@ -89,7 +89,7 @@ The package uses a number of third-party packages including \pkg{dplyr}, \pkg{RM
 
 \pkg{clinconcept} builds concept databases using data files downloaded from the NHS Technology Reference data Update Distribution (NHS TRUD) web-site (https://isd.digital.nhs.uk). In order to obtain access to these downloads it is necessary to register with the NHS TRUD. For copyright and size reasons it has not been not possible to include these files with the \pkg{clinconcept} package or make them available outside the NHS TRUD as separate downloads.
 
-Once registered, you will need to request access to, and then download your required code sets (see appendix A for details of the download types currently supported by \pkg{clinconcept}). Once downloaded, you will need to extract the files and make a note of the base location of these files for later use.
+Once registered, you will need to request access to, and then download your required code sets (see appendix A for details of the download types currently supported by \pkg{clinconcept}). Once downloaded, you will need to extract the files and make a note of the base location of these files for later use. As of 2020, READ version 2 and 3 downloads are now deprecated and have been withdrawn from the main TRUD site, please see appendix A for more information.
 
 To build concept databases \pkg{clinconcept} uses a database management system (DBMS); currently it supports SQLite or MySQL. Of these, SQLite is the simplest to setup and use. If it is not already available on your system it can easily be installed on Linux platforms through a package manager, or if using Windows by downloading it from the SQLite web site (https://sqlite.org/).
 
@@ -354,11 +354,11 @@ The table below contains information on the supported downloads and the queryabl
   \textbf{modifier\_5}  modifier text added to description to get term based on 5th character in code \\
   \textbf{tree\_description}: extended description of term \\
   } & \pbox{6cm}{ICD10 5th Edition data file release}\\ \hline
-  READ V2 (NHSReadV2) & \pbox{6cm}{
+  READ V2 (NHSReadV2)* & \pbox{6cm}{
   \textbf{read\_code}: READ version 2 code (4-byte) \\
   \textbf{term}: human-readable/searchable clinical term \\
-  } & NHS UK Read Codes Version 2  \\ \hline
-  READ V3 (NHSReadV3) & \pbox{6cm}{
+  } & NHS UK Read Codes Version 2*  \\ \hline
+  READ V3/Clinical Terms Version 3 (NHSReadV3)* & \pbox{6cm}{
   \textbf{read\_code}: READ version 3 code (5-byte) \\
   \textbf{term}: human-readable/searchable clinical term \\
   \textbf{status}: current (C), redundant (R), optional (O) or extinct (E) \\
@@ -375,6 +375,9 @@ The table below contains information on the supported downloads and the queryabl
    \hline
 \end{tabular}
 
+*READ version 2 and 3 now have to be obtained through a separate 'Retired Products' site.
+An account to access this site can be obtained by emailing the information.standards@nhs.net email address with a request for access.
+The downloaded ZIP files remain the same as those which were available through the TRUD site.
 
 \end{appendix}
 \end{document}
