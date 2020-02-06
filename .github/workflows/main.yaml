@@ -24,6 +24,7 @@ jobs:
         run: |
           tlmgr install ae
           tlmgr install thumbpdf
+	  tlmgr install setspace
           Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           eval "$sysreqs"
