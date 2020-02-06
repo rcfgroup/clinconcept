@@ -27,6 +27,7 @@ jobs:
           tlmgr install setspace
           tlmgr install pbox
           tlmgr install float
+          tlmgr install epstopdf
           Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           eval "$sysreqs"
