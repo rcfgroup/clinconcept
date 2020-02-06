@@ -37,7 +37,6 @@ jobs:
         run: apt-get update
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
-      - uses: r-lib/actions/setup-pandoc@master
       - name: Install system dependencies
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
@@ -50,17 +49,6 @@ jobs:
       - name: Check
         run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args=c('--no-manual','--no-vignettes','--no-build-vignettes','--ignore-vignettes'), build_args=c('--no-manual','--no-build-vignettes'))"
   windows:
-    runs-on: ['windows-latest']
-    strategy:
-      matrix:
-        r: ['3.6']
-    steps:
-      - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-r@master
-      - name: Install dependencies
-        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
-      - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', windows:
     runs-on: ['windows-latest']
     strategy:
       matrix:
