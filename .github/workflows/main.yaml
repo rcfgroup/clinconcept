@@ -26,6 +26,7 @@ jobs:
           echo "deb http://miktex.org/download/ubuntu xenial universe" | sudo tee /etc/apt/sources.list.d/miktex.list
           apt-get update
           apt-get install miktex -y -q
+          miktexsetup --shared=yes finish
           tlmgr install ae
           tlmgr install thumbpdf
           tlmgr install setspace
