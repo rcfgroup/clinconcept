@@ -26,7 +26,6 @@ jobs:
           tlmgr install thumbpdf
           tlmgr install setspace
           tlmgr install pbox
-          tlmgr install array
           tlmgr install float
           Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
