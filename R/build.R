@@ -110,7 +110,7 @@ execute_sql_statements <-function(dict, statements) {
 write_table_from_file<-function(src,table_name,filename,col_names=TRUE,col_types=NULL,delim=",",file_col_types=NULL,header=F, skip_rows=0) {
   rows<-readr::read_delim(filename,delim=delim,
                           col_names=col_names,quote="",col_types=file_col_types, skip=skip_rows)
-  DBI::dbWriteTable(src,table_name,rows,field.types=col_types,header=header,overwrite=T)
+  DBI::dbWriteTable(src,name=table_name,value=rows, row.names=FALSE, field.types=col_types,header=header,overwrite=T)
 }
 
 #' Find file matching regular expression in directory. Used to retrieve code files which vary depending on version.
