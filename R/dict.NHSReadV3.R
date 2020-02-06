@@ -8,7 +8,6 @@ get_ptable_code_field.NHSReadV3<-function(dict) {"read_code"}
 get_ptable_parent_field.NHSReadV3<-function(dict) {"parent_read_code"}
 
 build_concept_tables.sqlite.NHSReadV3 <- function(dict,replacements) {
-  #read CSV data into SQLite table
   data_file_path = replacements[['data-file-path']]
   sqlite<-dict$src
 
@@ -45,9 +44,9 @@ get_parent_codes.NHSReadV3<-function(dict,code,immediate_parents=F,active_only=F
   codes
 }
 
-# get_relationships.NHSReadV3<-function(dict,code,children) {
-#   dplyr::collect(extract_relations_from_dag(dict,code,immediate_relations=F,children=children))
-# }
+get_relationships.NHSReadV3<-function(dict,code,children) {
+  dplyr::collect(extract_relations_from_dag(dict,code,immediate_relations=F,children=children))
+}
 
 # ' @importFrom rlang .data
 

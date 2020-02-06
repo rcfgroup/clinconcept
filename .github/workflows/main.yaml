@@ -3,27 +3,6 @@ on: [push, pull_request]
 name: master
 
 jobs:
-  macOS:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        r: ['3.6']
-    steps:
-      - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-r@master
-        with:
-          r-version: ${{ matrix.r }}
-      - name: Install dependencies
-        env:
-          R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
-      - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual --no-build-vignettes')"
-      - name: Test coverage
-        if: matrix.r == '3.6'
-        run: |
-          Rscript -e 'remotes::install_github("r-lib/covr@gh-actions")'
-          Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
   linux:
     runs-on: ubuntu-latest
     strategy:
@@ -33,6 +12,8 @@ jobs:
     env:
       CRAN: 'https://demo.rstudiopm.com/all/__linux__/xenial/latest'
     steps:
+      - name: Update apt-get
+        run: apt-get update
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
       - name: Install system dependencies
@@ -45,8 +26,7 @@ jobs:
       - name: Install dependencies
         run: Rscript -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
-        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual --no-build-vignettes')"
-
+        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args=c('--no-manual','--no-vignettes','--no-build-vignettes','--ignore-vignettes'), build_args=c('--no-manual','--no-build-vignettes'))"
   windows:
     runs-on: ['windows-latest']
     strategy:
@@ -58,4 +38,4 @@ jobs:
       - name: Install dependencies
         run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args = '--no-manual --no-build-vignettes')"
+        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args=c('--no-manual','--no-vignettes','--no-build-vignettes','--ignore-vignettes'), build_args=c('--no-manual','--no-build-vignettes'))"

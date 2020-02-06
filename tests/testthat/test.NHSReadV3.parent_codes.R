@@ -24,14 +24,14 @@ test_that("get_parent_codes returns filtered READ v3 ancestor codes when immedia
 })
 
 
-test_that("get_parent_codes returns filtered READ v3 descendent codes when current_only flag",{
+test_that("get_parent_codes returns filtered READ v3 descendent codes when active_only flag",{
   expect_parent_codes(dict,"H3...",c(".....", "H....", "X0003", "XaBVJ"),active=T)
   expect_parent_codes(dict,"H31..",c(".....", "H....", "X0003", "X104H", "X104d", "XaBVJ", "XaDtP"
   ),active=T)
   expect_parent_codes(dict,"H32..",c(".....", "H....", "X0003", "XaBVJ"),active=T)
 })
 
-test_that("get_parent_codes returns filtered READ v3 descendent codes when immediate_descendents and current_only flag",{
+test_that("get_parent_codes returns filtered READ v3 descendent codes when immediate_descendents and active_only flag",{
   expect_parent_codes(dict,"H3...",c("H...."),immediate=T)
   expect_parent_codes(dict,"H31..",c("XaDtP"),immediate=T)
   expect_parent_codes(dict,"H32..",c("H...."),immediate=T)

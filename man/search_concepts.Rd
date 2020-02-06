@@ -27,6 +27,7 @@ config<-cc_from_file("/path/to/dictconfig")
 
 #return all read codes containing 'asthma' and 'lung'
 
- asthma_lung_codes<-search_concepts(config,term \%like\% "asthma" | term \%like\% "lung",include_synonyms=F)
+ asthma_lung_codes<-search_concepts(config,term \%like\% "asthma" |
+ term \%like\% "lung",include_synonyms=F)
 }
 }
