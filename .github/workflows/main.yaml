@@ -38,4 +38,4 @@ jobs:
       - name: Install dependencies
         run: Rscript -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
-        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args='--no-manual --no-vignettes --no-build-vignettes --ignore-vignettes', build_args='--no-manual --no-build-vignettes')"
+        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args=c('--no-manual','--no-vignettes','--no-build-vignettes','--ignore-vignettes'), build_args=c('--no-manual','--no-build-vignettes'))"
