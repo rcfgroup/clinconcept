@@ -22,29 +22,34 @@ build_concept_tables.sqlite.NHSReadV3 <- function(dict,replacements) {
   parents_types<-list(read_code="COLLATE BINARY",parent_read_code="COLLATE BINARY")
 
   write_table_from_file(sqlite,"read_terms_version3",paste0(data_file_path,"/V3/Terms.v3"),col_names=terms_fields,col_types=terms_types,delim="|")
-  write_table_from_file(sqlite,"read_link_version3",paste0(data_file_path,"/V3/Descrip.v3"),col_names=link_fields,col_types=link_types,delim="|")
-  write_table_from_file(sqlite,"read_concept_version3",paste0(data_file_path,"/V3/Concept.v3"),col_names=concept_fields,col_types=concept_types,delim="|")
-  write_table_from_file(sqlite,"read_parents_version3",paste0(data_file_path,"/V3/V3Hier.v3"),col_names=parents_fields,col_types=parents_types,delim="|")
+  write_table_from_file(sqlite,"read_link_version3",paste0(data_file_path,"/V3/Descrip.v3"),link_fields,link_types,delim="|")
+  write_table_from_file(sqlite,"read_concept_version3",paste0(data_file_path,"/V3/Concept.v3"),concept_fields,concept_types,delim="|")
+  write_table_from_file(sqlite,"read_parents_version3",paste0(data_file_path,"/V3/V3Hier.v3"),parents_fields,parents_types,delim="|")
 }
 
-get_child_codes.NHSReadV3<-function(dict,code,immediate_children=F,active_only=F) {
+get_child_codes.NHSReadV3<-function(dict,code,immediate_children=F,current_only=F) {
   codes<-extract_relations_from_dag(dict,code,immediate_children,children=T)
-  if(active_only) {
-    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(read_code %in% codes & status=='C') %>% dplyr::collect()
+  if(current_only) {
+    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(code %in% codes & status=='C') %>% dplyr::collect()
     return(unique(code_tbl$read_code))
   }
   codes
 }
-
-get_parent_codes.NHSReadV3<-function(dict,code,immediate_parents=F,active_only=F) {
+get_parent_codes.NHSReadV3<-function(dict,code,immediate_parents=F,current_only=F) {
   codes<-extract_relations_from_dag(dict,code,immediate_parents,children=F)
 
-  if(active_only) {
-    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(read_code %in% codes & status=='C') %>% dplyr::collect()
+  if(current_only) {
+    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(code %in% codes & status=='C') %>% dplyr::collect()
     return(unique(code_tbl$read_code))
   }
   codes
 }
+
+get_relationships.NHSReadV3<-function(dict,code,children) {
+  dplyr::collect(extract_relations_from_dag(dict,code,immediate_relations=F,children=children))
+}
+
+# ' @importFrom rlang .data
 
 is_code_present.NHSReadV3<-function(dict,code) {
   read_tbl <- dict$src %>% dplyr::tbl("read_version3") %>% dplyr::select(c("read_code","synonym")) %>% dplyr::filter(read_code==code & synonym!='1')
