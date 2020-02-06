@@ -1,12 +1,12 @@
 Package: clinconcept
 Type: Package
-Title: A package for loading and querying clinical concept dictionaries in R
+Title: A Package for Loading and Querying Clinical Concept Dictionaries in R
 Version: 0.1.0
 Authors@R: c(
-  person("Rob", "Free", "rcfree@protonmail.com", c("aut", "cre"), comment = c(ORCID = "0000-0001-8053-435X"))
+  person("Rob", "Free", , "rcfree@protonmail.com", c("aut", "cre"), comment = c(ORCID = "0000-0001-8053-435X"))
   )
 Maintainer: Rob Free <rcfree@protonmail.com>
-Description: clinconcept is a provides tools to work with clinical concept dictionaries by enabling researchers to build local or remote databases
+Description: Tools to work with clinical concept dictionaries by enabling researchers to build local or remote databases
   using UK National Health Service (NHS) based concept dictionary downloads and then query terms/concepts directly or through hierarchical/graphs-based relationships.
   Supported by this tool are NHS-based downloads of READ versions 2 and 3, SNOMED-CT and ICD10.
 License: GPL-3
