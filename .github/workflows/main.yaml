@@ -3,6 +3,26 @@ on: [push, pull_request]
 name: main
 
 jobs:
+  macOS:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        r: ['3.6']
+    steps:
+      - uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.r }}
+      - name: Install dependencies
+        env:
+          R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+        run: |
+          ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+          brew install mariadb-connector-c
+          Rscript -e "install.packages(c('RMySQL'))"
+          Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+      - name: Check
+        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args=c('--no-manual','--no-vignettes','--no-build-vignettes','--ignore-vignettes'), build_args=c('--no-manual','--no-build-vignettes'))"
   linux:
     runs-on: ubuntu-latest
     strategy:

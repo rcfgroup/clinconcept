@@ -1,6 +1,6 @@
 ![](https://github.com/rcfgroup/clinconcept/workflows/main/badge.svg)
 
-# clinconcept
+# Simpler handling of clinical concepts in R with clinconcept
 
 Data from electronic healthcare records are often based around clinical concept dictionaries, which can be difficult to use for research due to the design, size and complex nature of these dictionaries. 
 

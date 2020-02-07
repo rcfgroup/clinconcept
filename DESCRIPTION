@@ -9,7 +9,7 @@ Maintainer: Rob Free <rcfree@protonmail.com>
 Description: Tools to work with clinical concept dictionaries. Helps researchers build local or remote databases
   using UK National Health Service (NHS) based concept dictionary downloads and then query terms/concepts directly or through hierarchical/graphs-based relationships.
   Supported by this tool are NHS-based downloads of READ versions 2 and 3, SNOMED-CT and ICD10.
-License: GPL-3
+License: LGPL (>=3.0)
 Encoding: UTF-8
 LazyData: true
 Suggests:
