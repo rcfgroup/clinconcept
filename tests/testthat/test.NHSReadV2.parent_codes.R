@@ -1,8 +1,8 @@
 skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
 
-dict<-setup_test_dict("NHSReadV2",F)
+context("READ V2 parent code retrieval function")
 
-context("READ V2 parent code retrieval functions")
+dict<-testthat::setup(setup_test_dict("NHSReadV2",T))
 
 test_that("get_parent_codes returns all READ v2 ancestor codes when default parameters",{
   expect_parent_codes(dict,"H3...",c("H...."))
@@ -16,5 +16,4 @@ test_that("get_parent_codes returns filtered READ v3 ancestor codes when immedia
   expect_parent_codes(dict,"H32..",c("H3..."),immediate=T)
 })
 
-cc_disconnect(dict)
-
+testthat::teardown(cleanup_test_dict(dict))

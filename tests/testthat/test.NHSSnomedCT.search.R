@@ -1,27 +1,27 @@
 skip_if_not(is_sqlite_available())
-dict<-setup_test_dict("NHSSnomedCT",F)
-context("SNOMED-CT search concepts function")
-test_that("search_concepts using snomed_code filters returns correct rows through dplyr",{
-  skip_if_not(cc_is_available(dict),paste(dict$type, "must be installed to run these tests"))
-  skip_on_cran()
 
+dict<-testthat::setup(dict<-setup_test_dict("NHSSnomedCT",T))
+
+context("SNOMED-CT search concepts function")
+
+test_that("search_concepts using snomed_code filters returns correct rows through dplyr",{
   enable_case_sensitivity(dict)
 
-  obs_terms<-search_concepts(dict,snomed_code=="1945002") %>% arrange(snomed_code) %>% collect()
+  obs_terms<-search_concepts(dict,snomed_code=="1945002") %>% dplyr::arrange(snomed_code) %>% dplyr::collect()
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[2,]$term,"Allergic asthma with stated cause (disorder)")
 
-  obs_terms<-search_concepts(dict,(snomed_code=="1945002" | snomed_code=="30352005")) %>% arrange(snomed_code) %>% collect()
+  obs_terms<-search_concepts(dict,(snomed_code=="1945002" | snomed_code=="30352005")) %>% dplyr::arrange(snomed_code) %>% dplyr::collect()
   expect_equal(nrow(obs_terms),4)
   expect_equal(obs_terms[1,]$term,"Allergic asthma with stated cause")
   expect_equal(obs_terms[3,]$term,"Allergic-infective asthma")
 
-  obs_terms<-search_concepts(dict,snomed_code %in% c("1945002","30352005")) %>% arrange(snomed_code) %>% collect()
+  obs_terms<-search_concepts(dict,snomed_code %in% c("1945002","30352005")) %>% dplyr::arrange(snomed_code) %>% dplyr::collect()
   expect_equal(nrow(obs_terms),4)
   expect_equal(obs_terms[1,]$term,"Allergic asthma with stated cause")
   expect_equal(obs_terms[3,]$term,"Allergic-infective asthma")
 
-  obs_terms<-search_concepts(dict,snomed_code %like% "19%" & (!snomed_code=="195972005")) %>% arrange(snomed_code) %>% collect()
+  obs_terms<-search_concepts(dict,snomed_code %like% "19%" & (!snomed_code=="195972005")) %>% dplyr::arrange(snomed_code) %>% dplyr::collect()
   expect_equal(nrow(obs_terms),4)
   expect_equal(obs_terms[1,]$term,"Allergic asthma with stated cause")
   expect_equal(obs_terms[4,]$term,"Intrinsic asthma NOS (disorder)")
@@ -30,22 +30,19 @@ test_that("search_concepts using snomed_code filters returns correct rows throug
 })
 
 test_that("search_concepts using terms returns correct rows through dplyr",{
-  skip_if_not(cc_is_available(dict),paste(dict$type, "must be installed to run these tests"))
-  skip_on_cran()
-
   disable_case_sensitivity(dict)
 
-  obs_terms<-collect(search_concepts(dict,term %like% "%asthma%" & term %like% "%allergic-infective%"))
+  obs_terms<-dplyr::collect(search_concepts(dict,term %like% "%asthma%" & term %like% "%allergic-infective%"))
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[1,]$snomed_code,"30352005")
   expect_equal(obs_terms[2,]$snomed_code,"30352005")
 
-  obs_terms<-collect(search_concepts(dict,term %in% c("Enzyme detergent lung","Wood asthma")))
+  obs_terms<-dplyr::collect(search_concepts(dict,term %in% c("Enzyme detergent lung","Wood asthma")))
   expect_equal(nrow(obs_terms),2)
   expect_equal(obs_terms[1,]$snomed_code,"41553006")
   expect_equal(obs_terms[2,]$snomed_code,"56968009")
 
-  obs_terms<-collect(arrange(search_concepts(dict,term %like% "%asthma%" & (!term %like% "%allergic%")),snomed_code))
+  obs_terms<-dplyr::collect(dplyr::arrange(search_concepts(dict,term %like% "%asthma%" & (!term %like% "%allergic%")),snomed_code))
 
   expect_equal(nrow(obs_terms),53)
   expect_equal(obs_terms[1,]$snomed_code,"12428000")
@@ -55,9 +52,6 @@ test_that("search_concepts using terms returns correct rows through dplyr",{
 })
 
 test_that("search_concepts returns different vector outputs",{
-  skip_if_not(cc_is_available(dict),paste(dict$type, "must be installed to run these tests"))
-  skip_on_cran()
-
   disable_case_sensitivity(dict)
   obs_codes<-search_concepts(dict,term %like% "%allergic%" & term %like% "%asthma%",output="codes")
 
@@ -77,6 +71,6 @@ test_that("search_concepts returns different vector outputs",{
                            "Allergic atopic asthma"))
 })
 
-cleanup_test_dict(dict)
+testthat::teardown(cleanup_test_dict(dict))
 
 

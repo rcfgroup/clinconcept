@@ -1,5 +1,6 @@
 skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-dict<-setup_test_dict("NHSReadV2",F)
+dict<-testthat::setup(setup_test_dict("NHSReadV2",T))
+
 context("READ V2 search concepts function")
 
 test_that("search_concepts using read_code filters returns correct rows through dplyr",{
@@ -67,6 +68,7 @@ test_that("search_concepts returns different vector outputs",{
   expect_equal(obs_terms,c("Chronic obstructive pulmonary disease","Chronic bronchitis"))
 })
 
-cleanup_test_dict(dict)
+testthat::teardown(cleanup_test_dict(dict))
+
 
 

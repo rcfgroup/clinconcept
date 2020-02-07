@@ -4,8 +4,6 @@ dict<-setup_test_dict("NHSSnomedCT",T)
 context("SNOMED-CT parent code retrieval functions")
 
 test_that("get_parent_codes returns all NHS SNOMED-CT ascendent codes when default parameters",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
   expect_parent_codes(dict,"703954005",c("12263007", "55985003", "30352005", "187214007", "112476003",
                                          "82094008", "89187006", "441862004", "472964009", "424643009",
                                          "92807009", "711092006", "16862005", "39607008", "116003000",
@@ -30,13 +28,11 @@ test_that("get_parent_codes returns filtered SNOMED-CT ascendent codes when imme
 })
 
 test_that("get_child_codes returns filtered SNOMED-CT descendent codes when current_only flag",{
-  skip_if_not(is_sqlite_available(),"SQLite must be installed to run these tests")
-  skip_on_cran()
   expect_parent_codes(dict,"703954005",c("30352005", "389145006", "389146007", "424643009", "92807009"
-                                         ),current=T)
+                                         ),active=T)
 
 })
 
-cc_disconnect(dict)
+testthat::teardown(cleanup_test_dict(dict))
 
 

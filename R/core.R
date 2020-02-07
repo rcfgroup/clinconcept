@@ -30,7 +30,7 @@ cc_from_list <- function(dict_type,options) {
     stop("Options must be a list");
   }
   if(!"sql_path" %in% names(options)) {
-    options$sql_path=system.file("sql")
+    options$sql_path=system.file("sql",package="clinconcept")
   }
   class(options) <- c(dict_type,"clinconcept")
   if(!"dbname" %in% names(options)) {
@@ -194,7 +194,10 @@ cc_debug<-function(value=NULL) {
 #' Utility function used to disconnect database connection
 #'
 #' @param dict Clinical dictionary object
+#' @importFrom dbplyr sql
+
 #' @export
 cc_disconnect<-function(dict) {
   DBI::dbDisconnect(dict$src)
+  dbplyr::sql()
 }

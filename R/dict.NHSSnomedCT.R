@@ -1,4 +1,4 @@
-utils::globalVariables(c("active"))
+utils::globalVariables(c("active","snomed_code"))
 
 get_ctable_name.NHSSnomedCT<-function(dict) {"snomed_description"}
 get_ctable_code_field.NHSSnomedCT<-function(dict) {"snomed_code"}
@@ -16,22 +16,22 @@ build_concept_tables.NHSSnomedCT <- function(dict,replacements) {
 }
 
 # ' @importFrom rlang .data
-get_child_codes.NHSSnomedCT<-function(dict,code,immediate_children=F,current_only=F) {
+get_child_codes.NHSSnomedCT<-function(dict,code,immediate_children=F,active_only=F) {
   codes<-extract_relations_from_dag(dict,code,immediate_children,children=T)
 
-  if(current_only) {
-    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(code %in% codes & active=='1') %>% dplyr::collect()
+  if(active_only) {
+    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(snomed_code %in% codes & active=='1') %>% dplyr::collect()
     return(unique(code_tbl$snomed_code))
   }
   codes
 }
 
 # ' @importFrom rlang .data
-get_parent_codes.NHSSnomedCT<-function(dict,code,immediate_parents=F,current_only=F) {
+get_parent_codes.NHSSnomedCT<-function(dict,code,immediate_parents=F,active_only=F) {
   codes<-extract_relations_from_dag(dict,code,immediate_parents,children=F)
 
-  if(current_only) {
-    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(code %in% codes & active=='1') %>% dplyr::collect()
+  if(active_only) {
+    code_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict)) %>% dplyr::filter(snomed_code %in% codes & active=='1') %>% dplyr::collect()
     return(unique(code_tbl$snomed_code))
   }
   codes
