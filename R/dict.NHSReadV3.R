@@ -12,13 +12,13 @@ build_concept_tables.sqlite.NHSReadV3 <- function(dict,replacements) {
   sqlite<-dict$src
 
   terms_fields<-c("term_id","term_status","term_30","term_60","term_198")
-  terms_types<-list(term_id="COLLATE BINARY",term_status="",term_30="",term_60="",term_198="")
+  terms_types<-c(term_id="COLLATE BINARY",term_status="",term_30="",term_60="",term_198="")
   link_fields<-c("read_code","term_id","desc_type")
-  link_types<-list(read_code="COLLATE BINARY",term_id="COLLATE BINARY",desc_type="")
+  link_types<-c(read_code="COLLATE BINARY",term_id="COLLATE BINARY",desc_type="")
   concept_fields<-c("read_code","status","ling_role","X1")
-  concept_types<-list(read_code="COLLATE BINARY",status="",ling_role="",X1="")
+  concept_types<-c(read_code="COLLATE BINARY",status="",ling_role="",X1="")
   parents_fields<-c("read_code","parent_read_code","list_order")
-  parents_types<-list(read_code="COLLATE BINARY",parent_read_code="COLLATE BINARY")
+  parents_types<-c(read_code="COLLATE BINARY",parent_read_code="COLLATE BINARY")
 
   write_table_from_file(sqlite,"read_terms_version3",paste0(data_file_path,"/V3/Terms.v3"),col_names=terms_fields,col_types=terms_types,delim="|")
   write_table_from_file(sqlite,"read_link_version3",paste0(data_file_path,"/V3/Descrip.v3"),link_fields,link_types,delim="|")
