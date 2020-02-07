@@ -36,7 +36,7 @@
 
 %% - \Abstract{} almost as usual
 \Abstract{
-Data from electronic healthcare records are often based around clinical concept dictionaries, which can be difficult to use in research due to the design, size and complex nature of these dictionaries. Described here is an \proglang{R} \citep{R} package: \pkg{clinconcept} which provides tools to simplify this by building a local or remote databases from UK health service provided concept dictionary downloads and then working with these concepts and terms. Supported in this tool are READ versions 2 and 3, SNOMED-CT and ICD10. This paper describes how to install the \pkg{clinconcept} package; build concept dictionary databases using downloads; and how to use the package to query concepts and terms.
+Data from electronic healthcare records are often based around clinical concept dictionaries, which can be difficult to use in research due to the design, size and complex nature of these dictionaries. Described here is an \proglang{R} \citep{R} package: \pkg{clinconcept} which provides tools to simplify this by building local or remote databases using UK National Health Service (NHS) provided concept dictionary downloads and then working with these concepts and terms. Supported in this tool are READ versions 2 and 3, SNOMED-CT and ICD10. This paper describes how to install the \pkg{clinconcept} package; build concept dictionary databases using downloads; and how to use the package to query concepts and terms.
 }
 
 %% - \Keywords{} with LaTeX markup, at least one required
@@ -71,7 +71,7 @@ Data from electronic healthcare records are often based around clinical concept 
 
 Routinely collected health care data are often recorded in electronic health care record (EHR) systems using clinical concepts. These concepts take the form of controlled vocabularies which map a concept code to human-readable/searchable terms. Since different health-care workers use different descriptions for concepts, dictionaries may also contain synonyms for the same concept, which allows those workers to find concepts more easily. The structure of the controlled vocabulary can vary from a simple two-level hierarchy such as the 10th revision of the International Statistical Classification of Diseases and Related Health Problems (ICD10) \citep{ICD10:2017} through to a more complicated diacyclic graph (DAG) such as the Systematized Nomenclature of Medicine Clinical Terms (SNOMED-CT) \citep{SNOMED:2010}. Depending on the complexity of the vocabulary structure, information can be recorded at various levels of specificity. For example, a patient could be coded generically with Asthma, or be given a more specific diagnosis of Eosinophilic asthma). Additionally, the size of vocabularies can vary from tens of thousands to hundreds of thousands of terms, concepts and codes.
 
-Described here is an extensible \proglang{R} \citep{R} package \pkg{clinconcept} which helps researchers work with the clinical concept dictionaries most commonly used in primary and secondary care in the UK: READ versions 2 and 3 \citep{ONeil:1995}, SNOMED-CT and ICD10. The package provides functionality to i) build a local or remote database containing one or more clinical dictionaries, using UK National Health Service (NHS) provided downloads of these dictionaries; ii) search clinical concepts using a \pkg{dplyr} focused interface to achieve complex searches; and iii) extract child and parent codes/terms with support for hierarchical and DAG-based searches (depending on the dictionary).
+Described here is an extensible \proglang{R} \citep{R} package: \pkg{clinconcept}, which helps researchers work with some clinical concept dictionaries commonly used in primary and secondary care: READ versions 2 and 3 \citep{ONeil:1995}, SNOMED-CT and ICD10. The package provides functionality to i) build a local or remote database containing one or more clinical dictionaries, using UK NHS provided downloads of these dictionaries; ii) search clinical concepts using a \pkg{dplyr} focused interface to achieve complex searches; and iii) extract child and parent codes/terms with support for hierarchical and DAG-based searches (depending on the dictionary).
 
 \section{Installing the Package} \label{sec:install}
 
@@ -100,7 +100,7 @@ Once the concept dictionary files have been downloaded and extracted, and a DBMS
 
 In this example we will use SQLite as DBMS to create a local build of the READ version 3 dictionaries; but the same approach should work for READ version 2,SNOMED-CT and ICD10.
 
-An \pkg{clinconcept} clinical dictionary object must be created initially. This object provides a container for the configuration and database connection. To simplify this \code{rcc\_from_} helper methods are provided. We recommend using the \code{rcc\_from\_file} or \code{rcc\_from\_home} functions. The former loads options from the specified file path, while the latter loads a specified file from the user's home directory. The file format used is JSON (a plain text format). An example JSON file is given below. When using MySQL 'user', 'pass', 'port' and 'host' options may also be included.
+An \pkg{clinconcept} clinical dictionary object must be created initially. This object provides a container for the configuration and database connection. To simplify this \code{cc\_from_} helper methods are provided. We recommend using the \code{cc\_from\_file} or \code{cc\_from\_home} functions. The former loads options from the specified file path, while the latter loads a specified file from the user's home directory. The file format used is JSON (a plain text format). An example JSON file is given below. When using MySQL 'user', 'pass', 'port' and 'host' options may also be included.
 
 \begin{Code}
 {
@@ -109,9 +109,9 @@ An \pkg{clinconcept} clinical dictionary object must be created initially. This 
 }
 \end{Code}
 
-It is also possible to use the \code{rcc\_from\_list} function, but this encourages the inclusion of usernames and passwords in source code, so its use is discouraged for security reasons.
+It is also possible to use the \code{cc\_from\_list} function, but this encourages the inclusion of usernames and passwords in source code, so its use is discouraged for security reasons.
 
-The \code{rcc\_from_} functions also require a concept dictionary type. Currently supported are \emph{NHSReadV2}, \emph{NHSReadV3}, \emph{NHSICD10} and \emph{NHSSnomedCT}.
+The \code{cc\_from_} functions also require a concept dictionary type. Currently supported are \emph{NHSReadV2}, \emph{NHSReadV3}, \emph{NHSICD10} and \emph{NHSSnomedCT}.
 
 All three of the approaches below are equivalent:
 \begin{Code}
@@ -284,7 +284,7 @@ If you have a clinical dictionary or DBMS which is not supported, \pkg{clinconce
 
 A brief example is given here for SQLite and a dictionary type called TESTCONCEPT. \pkg{clinconcept} uses S3 function calls with the clinical dictionary object (defined with both clinconcept and TESTCONCEPT classes). This means that the base clinconcept function will be called unless there is a TESTCONCEPT specific function. The building process is different as this is both dictionary AND DBMS specific.
 
-The first requirement is to create the clinical dictionary object. This simply requires use of one of the \code{rcc\_from\_} functions:
+The first requirement is to create the clinical dictionary object. This simply requires use of one of the \code{cc\_from\_} functions:
 
 \begin{Code}
 dict<-cc_from_home("TESTCONCEPT", "/path/to/dictconfig.json")
