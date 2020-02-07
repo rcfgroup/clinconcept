@@ -36,6 +36,8 @@ jobs:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
       - name: Install dependencies
-        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+        run: |
+          Rscript -e "install.packages(c('stringi'))"
+          Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
         run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args=c('--no-manual','--no-vignettes','--no-build-vignettes','--ignore-vignettes'), build_args=c('--no-manual','--no-build-vignettes'))"
