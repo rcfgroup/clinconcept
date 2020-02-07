@@ -2,10 +2,9 @@ citHeader("To cite clinconcept in publications use:")
 
 citEntry(entry = "Misc",
   title        = "Simpler handling of clinical concept dictionaries in R with {clinconcept}",
-  author       = personList(as.person("Robert C. Free"),
-                   as.person("X")),
+  author       = personList(as.person("Robert C. Free")),
   year         = "2020",
-  url          = "\url{https://github.com/rcfgroup/clinconcept}",
+  howpublished = "url{https://github.com/rcfgroup/clinconcept}",
 
   textVersion  =
   paste("Robert C. Free",
