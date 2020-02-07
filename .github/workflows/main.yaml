@@ -17,6 +17,8 @@ jobs:
         env:
           R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
         run: |
+          ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+          brew install mariadb-connector-c
           Rscript -e "install.packages(c('RMySQL'))"
           Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
