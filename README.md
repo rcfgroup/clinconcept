@@ -1,4 +1,4 @@
-![](https://github.com/rcfgroup/clinconcept/workflows/master/badge.svg)
+![](https://github.com/rcfgroup/clinconcept/workflows/main/badge.svg)
 
 # clinconcept
 

@@ -12,7 +12,8 @@
 #'
 #' #return all read codes containing 'asthma' and 'lung'
 #'
-#'  asthma_lung_codes<-search_concepts(config,term %like% "asthma" | term %like% "lung",include_synonyms=F)
+#'  asthma_lung_codes<-search_concepts(config,term %like% "asthma" |
+#'  term %like% "lung",include_synonyms=F)
 #'}
 search_concepts<-function(dict, ..., include_synonyms=F,output="tbl") {
   UseMethod("search_concepts")

@@ -18,7 +18,7 @@ build_concept_tables.NHSICD10 <- function(dict,replacements) {
   DBI::dbWriteTable(dict$src,"icd10_edition5",icd10)
 }
 
-get_child_codes.NHSICD10<-function(dict,code,immediate_children=F,current_only=F) {
+get_child_codes.NHSICD10<-function(dict,code,immediate_children=F,active_only=F) {
   if(grepl(".", code, fixed=TRUE)) {
     stop(paste("Provided code",code,"cannot have children"));
   }
@@ -31,7 +31,7 @@ get_child_codes.NHSICD10<-function(dict,code,immediate_children=F,current_only=F
   codes$icd10_code
 }
 
-get_parent_codes.NHSICD10<-function(dict,code,immediate_parents=F,current_only=F) {
+get_parent_codes.NHSICD10<-function(dict,code,immediate_parents=F,active_only=F) {
   if(!grepl(".", code, fixed=TRUE)) {
     stop(paste("Provided code",code,"cannot have parent"));
   }

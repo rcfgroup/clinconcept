@@ -1,21 +1,26 @@
 Package: clinconcept
 Type: Package
-Title: A package for loading and querying clinical concept dictionaries in R
+Title: A Package for Loading and Querying Clinical Concept Dictionaries in R
 Version: 0.1.0
-Author: Rob Free
-Maintainer: Rob Free <rob.free@le.ac.uk>
-Description: The package provides tools to build/load a database with one or more clinical
-    dictionaries using UK-based downloads of these dictionaries and query/search the dictionaries using
-    both hierarchical/DAG-based searches and advanced filtering.
+Authors@R: c(
+  person("Rob", "Free", , "rcfree@protonmail.com", c("aut", "cre"), comment = c(ORCID = "0000-0001-8053-435X"))
+  )
+Maintainer: Rob Free <rcfree@protonmail.com>
+Description: Tools to work with clinical concept dictionaries. Helps researchers build local or remote databases
+  using UK National Health Service (NHS) based concept dictionary downloads and then query terms/concepts directly or through hierarchical/graphs-based relationships.
+  Supported by this tool are NHS-based downloads of READ versions 2 and 3, SNOMED-CT and ICD10.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Suggests: 
+Suggests:
   testthat,
-  RMySQL (>= 0.10)
+  RMySQL (>= 0.10),
+    knitr,
+    rmarkdown
 Imports:
   dplyr (>= 0.7),
-  RSQLite (>= 2.0),
+  dbplyr (>= 1.4.0),
+  RSQLite (>= 2.0.0),
   jsonlite (>= 1.4),
   readr (>= 1.1),
   magrittr,
@@ -23,3 +28,6 @@ Imports:
   rlang,
   DBI
 RoxygenNote: 6.0.1
+URL: https://github.com/rcfgroup/clinconcept
+BugReports: https://github.com/rcfgroup/clinconcept/issues
+

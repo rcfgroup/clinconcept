@@ -1,0 +1,43 @@
+on: [push, pull_request]
+
+name: master
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        r: ['3.6']
+    container: rstudio/r-base:${{ matrix.r }}-xenial
+    env:
+      CRAN: 'https://demo.rstudiopm.com/all/__linux__/xenial/latest'
+    steps:
+      - name: Update apt-get
+        run: apt-get update
+      - uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@master
+      - name: Install system dependencies
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          eval "$sysreqs"
+      - name: Install dependencies
+        run: Rscript -e "remotes::install_deps(dependencies = TRUE)"
+      - name: Check
+        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(error_on = 'error', args=c('--no-manual','--no-vignettes','--no-build-vignettes','--ignore-vignettes'), build_args=c('--no-manual','--no-build-vignettes'))"
+  windows:
+    runs-on: ['windows-latest']
+    strategy:
+      matrix:
+        r: ['3.6']
+    steps:
+      - uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@master
+      - name: Install dependencies
+        run: |
+          Rscript -e "install.packages(c('stringi'))"
+          Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+      - name: Check
+        run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error', args=c('--no-manual','--no-vignettes','--no-build-vignettes','--ignore-vignettes'), build_args=c('--no-manual','--no-build-vignettes'))"
