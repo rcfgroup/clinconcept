@@ -10,7 +10,6 @@
 \usepackage{pbox}
 \usepackage{array}
 \usepackage{float}
-\doublespacing
 
 %% new custom commands
 \newcommand{\class}[1]{`\code{#1}'}
@@ -36,14 +35,14 @@
 
 %% - \Abstract{} almost as usual
 \Abstract{
-Data from electronic healthcare records are often based around clinical concept dictionaries, which can be difficult to use in research due to the design, size and complex nature of these dictionaries. Described here is an \proglang{R} \citep{R} package: \pkg{clinconcept} which provides tools to simplify this by building local or remote databases using UK National Health Service (NHS) provided concept dictionary downloads and then working with these concepts and terms. Supported in this tool are READ versions 2 and 3, SNOMED-CT and ICD10. This paper describes how to install the \pkg{clinconcept} package; build concept dictionary databases using downloads; and how to use the package to query concepts and terms.
+    Routinely collected data from electronic healthcare records are often based around clinical concept dictionaries. Increasingly this is being made available and used for research purposes. But without additional tooling it can be difficult to integrate these dictionaries into the analysis due to the design, size and complex nature of these dictionaries. Often an adhoc approach is used to manage clinical terminologies and handle querying of terms and concepts. To help improve this situation \pkg{clinconcept} was created. This package allows the researcher to simply build local or remote databases containing UK National Health Service (NHS) provided concept dictionary downloads including Read versions 2 and 3, SNOMED-CT and ICD10. The package then provides tools to interrogate the concepts and terms. This paper describes the rationale behind the package, how to install it and how to use it.
 }
 
 %% - \Keywords{} with LaTeX markup, at least one required
 %% - \Plainkeywords{} without LaTeX markup (if necessary)
 %% - Should be comma-separated and in sentence case.
-\Keywords{READ, SNOMED-CT, ICD10, clinical, concept, EHR, \proglang{R}}
-\Plainkeywords{READ, SNOMED-CT, ICD10, clinical, concept, EHR, R}
+\Keywords{Read, SNOMED-CT, ICD10, clinical, concept, EHR, \proglang{R}}
+\Plainkeywords{Read, SNOMED-CT, ICD10, clinical, concept, EHR, R}
 
 %% - \Address{} of at least one author
 %% - May contain multiple affiliations for each author
@@ -71,7 +70,7 @@ Data from electronic healthcare records are often based around clinical concept 
 
 Routinely collected health care data are often recorded in electronic health care record (EHR) systems using clinical concepts. These concepts take the form of controlled vocabularies which map a concept code to human-readable/searchable terms. Since different health-care workers use different descriptions for concepts, dictionaries may also contain synonyms for the same concept, which allows those workers to find concepts more easily. The structure of the controlled vocabulary can vary from a simple two-level hierarchy such as the 10th revision of the International Statistical Classification of Diseases and Related Health Problems (ICD10) \citep{ICD10:2017} through to a more complicated diacyclic graph (DAG) such as the Systematized Nomenclature of Medicine Clinical Terms (SNOMED-CT) \citep{SNOMED:2010}. Depending on the complexity of the vocabulary structure, information can be recorded at various levels of specificity. For example, a patient could be coded generically with Asthma, or be given a more specific diagnosis of Eosinophilic asthma). Additionally, the size of vocabularies can vary from tens of thousands to hundreds of thousands of terms, concepts and codes.
 
-Described here is an extensible \proglang{R} \citep{R} package: \pkg{clinconcept}, which helps researchers work with some clinical concept dictionaries commonly used in primary and secondary care: READ versions 2 and 3 \citep{ONeil:1995}, SNOMED-CT and ICD10. The package provides functionality to i) build a local or remote database containing one or more clinical dictionaries, using UK NHS provided downloads of these dictionaries; ii) search clinical concepts using a \pkg{dplyr} focused interface to achieve complex searches; and iii) extract child and parent codes/terms with support for hierarchical and DAG-based searches (depending on the dictionary).
+Described here is an extensible \proglang{R} \citep{R} package: \pkg{clinconcept}, which helps researchers work with some clinical concept dictionaries commonly used in primary and secondary care: Read versions 2 and 3 \citep{ONeil:1995}, SNOMED-CT and ICD10. The package provides functionality to i) build a local or remote database containing one or more clinical dictionaries, using UK NHS provided downloads of these dictionaries; ii) search clinical concepts using a \pkg{dplyr} focused interface to achieve complex searches; and iii) extract child and parent codes/terms with support for hierarchical and DAG-based searches (depending on the dictionary).
 
 \section{Installing the Package} \label{sec:install}
 
@@ -92,13 +91,13 @@ library(clinconcept)
 
 \pkg{clinconcept} builds concept databases using data files downloaded from the NHS Technology Reference data Update Distribution (NHS TRUD) web-site (https://isd.digital.nhs.uk). In order to obtain access to these downloads it is necessary to register with the NHS TRUD. For copyright and size reasons it has not been not possible to include these files with the \pkg{clinconcept} package or make them available outside the NHS TRUD as separate downloads.
 
-Once registered, you will need to request access to, and then download your required code sets (see appendix A for details of the download types currently supported by \pkg{clinconcept}). Once downloaded, you will need to extract the files and make a note of the base location of these files for later use. As of 2020, READ version 2 and 3 downloads are now deprecated and have been/are being withdrawn from the main TRUD site, but can be obtained in another way (described in appendix A).
+Once registered, you will need to request access to, and then download your required code sets (see appendix A for details of the download types currently supported by \pkg{clinconcept}). Once downloaded, you will need to extract the files and make a note of the base location of these files for later use. As of 2020, Read version 2 and 3 downloads are now deprecated and have been/are being withdrawn from the main TRUD site, but can be obtained in another way (described in appendix A).
 
 To build concept databases \pkg{clinconcept} uses a database management system (DBMS); currently it supports SQLite or MySQL. Of these, SQLite is the simplest to setup and use. If it is not already available on your system it can easily be installed on Linux platforms through a package manager, or if using Windows by downloading it from the SQLite web site (https://sqlite.org/). If you plan to use MySQL as your DBMS you will also need to install the \pkg{RMySQL} package manually using install.packages.
 
 Once the concept dictionary files have been downloaded and extracted, and a DBMS has been installed, a concept database can be built.
 
-In this example we will use SQLite as DBMS to create a local build of the READ version 3 dictionaries; but the same approach should work for READ version 2,SNOMED-CT and ICD10.
+In this example we will use SQLite as DBMS to create a local build of the Read version 3 dictionaries; but the same approach should work for Read version 2,SNOMED-CT and ICD10.
 
 An \pkg{clinconcept} clinical dictionary object must be created initially. This object provides a container for the configuration and database connection. To simplify this \code{cc\_from_} helper methods are provided. We recommend using the \code{cc\_from\_file} or \code{cc\_from\_home} functions. The former loads options from the specified file path, while the latter loads a specified file from the user's home directory. The file format used is JSON (a plain text format). An example JSON file is given below. When using MySQL 'user', 'pass', 'port' and 'host' options may also be included.
 
@@ -129,10 +128,10 @@ dict<-cc_from_list("NHSReadV3", list(type =
  "sqlite",name = "/path/to/readv3_db.sqlite"))
 \end{Code}
 
-We can now build concept databases using the clinical dictionary object. In our example, READ version 3 data files have been downloaded from the NHS TRUD site and extracted into /home/user/READV3.
+We can now build concept databases using the clinical dictionary object. In our example, Read version 3 data files have been downloaded from the NHS TRUD site and extracted into /home/user/ReadV3.
 
 \begin{Code}
-build_concept_tables(dict,'/home/user/READV3')
+build_concept_tables(dict,'/home/user/ReadV3')
 \end{Code}
 
 Loading concepts may take some time, however it only needs to be done once for each concept type.
@@ -267,7 +266,7 @@ These commands return a vector of codes which can be used as an argument in \cod
 \section{Technical Details}\label{sec:techdet}
 
 \subsection{Algorithms}
-The algorithm used internally by the relationship code search is dependant on the complexity of the dictionary and whether it is hierarchical or a DAG. In the case of READ version 2 which is a hierarchy, searches are done based on the first letters in the supplied code. For instance, to obtain child codes for H3... a database query is run for all those codes beginning with 'H3'. DAG-based searches, such as those used by SNOMED-CT use a recursive algorithm which finds ancestors/descendants at each level, and then retrieves each of their ancestors/descendants until no ancestors/descendents are returned. To improve performance the algorithm has been designed so that the same ancestors/descendents are not retrieved multiple times.
+The algorithm used internally by the relationship code search is dependant on the complexity of the dictionary and whether it is hierarchical or a DAG. In the case of Read version 2 which is a hierarchy, searches are done based on the first letters in the supplied code. For instance, to obtain child codes for H3... a database query is run for all those codes beginning with 'H3'. DAG-based searches, such as those used by SNOMED-CT use a recursive algorithm which finds ancestors/descendants at each level, and then retrieves each of their ancestors/descendants until no ancestors/descendents are returned. To improve performance the algorithm has been designed so that the same ancestors/descendents are not retrieved multiple times.
 
 \subsection{Regression Tests}
 The package contains regression tests based on \pkg{testthat} and some example concept data files. To run these tests SQLite must be pre-installed (the tests will check for the sqlite3 binary). Therefore, it is recommended that SQLite is installed before \pkg{clinconcept} is installed, so that the tests are run during package install. If not present, the tests are skipped automatically, although it is possible to run them following package installation by executing:
@@ -313,11 +312,11 @@ The \code{get\_child\_codes.TESTCONCEPT} \code{get\_parent\_codes.TESTCONCEPT} f
 
 This article provides a general overview of the R package \pkg{clinconcept} which was created to simplify the use of routine health care data. A simpler approach to deal with data of this type is timely given the increased interest and availability of this type of data.
 
-Some examples based on the use of READ version 3 are included to give the reader an idea of the overall building process and possible queries possible. Additional information for other types of clinical dictionary can be found in the appendix and in the R package documentation.
+Some examples based on the use of Read version 3 are included to give the reader an idea of the overall building process and possible queries possible. Additional information for other types of clinical dictionary can be found in the appendix and in the R package documentation.
 
 \pkg{clinconcept} provides a more extendable and straightforward build and query tool than the alternatives. Packages such as \pkg{rpcdsearch} \citep{rpcdsearch:2016}, while they have strengths do not support simple loading of NHS-based code lists or the ability to perform relationship-based searches. Non-R options such as graphical and web-based browsers, provide the required data but do not allow the results of these to be embedded into R scripts and used programmatically.
 
-Future plans include adding support for drug concepts (Drugs and Medicines + Devices and British National Formulary) and extending the features of \pkg{clinconcept} to providing cross-mapping functionality. This should be straightforward because files to do this are included in some of the NHS TRUD downloads. The possiblity of Phecode \citep{phecodes} integration will also be explored. This would allow a researcher to determine which codes from one clinical concept dictionary are equivalent to codes in another dictionary. There is also the possibility of extending support for searches of SNOMED-CT concepts to include attributes.
+Future plans include adding support for drug concepts (Drugs and Medicines + Devices and British National Formulary) and extending the features of \pkg{clinconcept} to providing cross-mapping functionality. This should be straightforward because files to do this are available as NHS TRUD downloads. This would allow a researcher to determine which codes from one clinical concept dictionary are equivalent to codes in another dictionary. There is also the possibility of extending support for searches of SNOMED-CT concepts to include attributes.
 
 I hope this package is useful to others and any suggestions for improvements or new features would be gratefully received.
 
@@ -332,55 +331,53 @@ This work was supported by the National Institute for Health Research Leicester 
 \bibliography{refs}
 
 
-\newpage
 %% -- Appendix (if any) --------------------------------------------------------
 %% - After the bibliography with page break.
 %% - With proper section titles and _not_ just "Appendix".
 
 
 %% -----------------------------------------------------------------------------
-
+\newpage
 \begin{appendix}
 
 \section{Information about Supported Clinical Dictionaries}
 
-The table below contains information on the supported downloads and the queryable fields for each type of clinical dictionary which will be useful when querying with the \code{search\_concepts} function. \pkg{clinconcept} dictionary types are included in parentheses in the \emph{Dictionary} column.
+The table below contains information on the supported downloads and the queryable fields for each type of clinical dictionary to help when querying with the \code{search\_concepts} function. \pkg{clinconcept} dictionary types are included in parentheses in the \emph{Dictionary} column.
 
-\begin{tabular}{| >{\raggedright}p{3cm} | >{\raggedright}p{6cm} | l  | }
+\begin{tabular}{| >{\raggedright}p{3cm} | >{\raggedright}p{7cm} | l  | }
 \hline
   Dictionary & Fields & Download name \\ \hline
-  ICD10 (NHSICD10) & \pbox{6cm}{
+  ICD10 (NHSICD10) & \pbox{7cm}{
   \textbf{icd10\_code}: ICD10 version 5 code \\
   \textbf{term}: human-readable/searchable clinical term \\
   \textbf{description}: original description \\
   \textbf{modifier\_4}: modifier text added to description to get term based on 4th character in code \\
   \textbf{modifier\_5}  modifier text added to description to get term based on 5th character in code \\
   \textbf{tree\_description}: extended description of term \\
-  } & \pbox{6cm}{ICD10 5th Edition data file release}\\ \hline
-  READ V2 (NHSReadV2)* & \pbox{6cm}{
-  \textbf{read\_code}: READ version 2 code (4-byte) \\
+  } & \pbox{4cm}{ICD10 5th Edition data file release}\\ \hline
+  Read V2 (NHSReadV2)* & \pbox{7cm}{
+  \textbf{read\_code}: Read version 2 code (4-byte) \\
   \textbf{term}: human-readable/searchable clinical term \\
   } & NHS UK Read Codes Version 2*  \\ \hline
-  READ V3/Clinical Terms Version 3 (NHSReadV3)* & \pbox{6cm}{
-  \textbf{read\_code}: READ version 3 code (5-byte) \\
+  Read V3/Clinical Terms Version 3 (NHSReadV3)* & \pbox{7cm}{
+  \textbf{read\_code}: Read version 3 code (5-byte) \\
   \textbf{term}: human-readable/searchable clinical term \\
   \textbf{status}: current (C), redundant (R), optional (O) or extinct (E) \\
   \textbf{synonym}: true (1) or false (0) \\
   \textbf{term\_id}: unique term ID (a term may have the same read\_code, but it would have a different term ID)
-   } & \pbox{6cm}{NHS UK Read Codes Clinical Terms Version 3} \\ \hline
-   SNOMED-CT (NHSSnomedCT) & \pbox{6cm}{
+   } & \pbox{4cm}{NHS UK Read Codes Clinical Terms Version 3} \\ \hline
+   SNOMED-CT (NHSSnomedCT) & \pbox{7cm}{
   \textbf{snomed\_code}: SNOMED-CT code \\
   \textbf{term}: human-readable/searchable clinical term \\
   \textbf{status}: current (C), redundant (R), optional (O) or extinct (E) \\
   \textbf{synonym}: true (1) or false (0) \\
   \textbf{term\_id}: unique term ID (a term may have the same read\_code, but it would have a different term ID)
-   } & \pbox{6cm}{UK SNOMED CT Clinical Edition, RF1} \\
+   } & \pbox{4cm}{UK SNOMED CT Clinical Edition, RF1} \\
    \hline
 \end{tabular}
-
-*READ version 2 and 3 now have to be obtained through a separate 'Retired Products' site.
+*Read version 2 and 3 now have to be obtained through a separate 'Retired Products' site.
 An account to access this site can be obtained by emailing the information.standards@nhs.net email address with a request for access.
 The downloaded ZIP files remain the same as those which were available through the TRUD site.
-
+\newpage
 \end{appendix}
 \end{document}
