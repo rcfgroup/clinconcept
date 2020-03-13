@@ -3,7 +3,7 @@
 \name{cc_from_file}
 \alias{cc_from_file}
 \title{This function will read a JSON file containing options used to build a clinical dictionary object. This is used by subsequent functions
-to direct building and querying. For security reasons, this function and \code{\link{cc_from_home}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.}
+to direct building and querying. For security reasons, for non-SQLite databases this function is preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.}
 \usage{
 cc_from_file(dict_type, json_file)
 }
@@ -14,16 +14,17 @@ cc_from_file(dict_type, json_file)
 }
 \description{
 This function will read a JSON file containing options used to build a clinical dictionary object. This is used by subsequent functions
-to direct building and querying. For security reasons, this function and \code{\link{cc_from_home}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
+to direct building and querying. For security reasons, for non-SQLite databases this function is preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
 }
 \examples{
 \dontrun{
-dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json")
+config_file<-paste0(system.file(package="clinconcept"),"/extdata/dictconfig.json"))
+dict<-cc_from_file("NHSReadV3",config_file)
 
 #clinical dictionary object then passed to other functions
 ...
 
-# /path/to/dictconfig.json file
+# extdata/dictconfig.json file
  {
    "type":"sqlite"
    "dbname":"/path/to/sqlitedb.sqlite"
@@ -32,5 +33,5 @@ dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json")
 
 }
 \seealso{
-\code{\link{cc_from_list}}, \code{\link{cc_from_home}}
+\code{\link{cc_from_list}}
 }

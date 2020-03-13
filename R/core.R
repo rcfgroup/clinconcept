@@ -16,10 +16,10 @@
 #'   port - database port (default 3306)
 #'
 #' @export
-#' @seealso \code{\link{cc_from_file}}, \code{\link{cc_from_home}}
+#' @seealso \code{\link{cc_from_file}}
 #' @examples
 #' \dontrun{
-#' dict<-cc_from_list(list(type="sqlite",dbname="/path/to/sqlitedb.sqlite"))
+#' dict<-cc_from_list(list(type="sqlite",dbname=paste0(tempdir(),"/sqlitedb.sqlite")))
 #'
 #' #clinical dictionary object then passed to other functions
 #' ...
@@ -67,20 +67,21 @@ cc_from_list <- function(dict_type,options) {
   options
 }
 #' This function will read a JSON file containing options used to build a clinical dictionary object. This is used by subsequent functions
-#' to direct building and querying. For security reasons, this function and \code{\link{cc_from_home}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
+#' to direct building and querying. For security reasons, for non-SQLite databases this function is preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
 #' @param dict_type Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT
 #' @param json_file Location of JSON file containing options to use to create a clinical dictionary object
 #'
 #' @export
-#' @seealso \code{\link{cc_from_list}}, \code{\link{cc_from_home}}
+#' @seealso \code{\link{cc_from_list}}
 #' @examples
 #' \dontrun{
-#' dict<-cc_from_file("NHSReadV3","/path/to/dictconfig.json")
+#' config_file<-paste0(system.file(package="clinconcept"),"/extdata/dictconfig.json"))
+#' dict<-cc_from_file("NHSReadV3",config_file)
 #'
 #' #clinical dictionary object then passed to other functions
 #' ...
 #'
-#' # /path/to/dictconfig.json file
+#' # extdata/dictconfig.json file
 #'  {
 #'    "type":"sqlite"
 #'    "dbname":"/path/to/sqlitedb.sqlite"
@@ -97,38 +98,6 @@ cc_from_file<-function(dict_type, json_file) {
   }
 
   cc_from_list(dict_type,json_data)
-}
-#' This function will use a JSON file in the users home directory to build a clinical dictionary object. This is used by subsequent functions
-#' to direct building and querying.
-#' The location of the JSON file will depend on the operating system being used.
-#' On Linux/OS X this will be /Users/<user>/. On newer versions of Windows it should be the same, although it may change.
-#' To determine where the file will need to be placed in R you can execute: \code{Sys.getenv('USERPROFILE')}
-#'
-#' For security reasons, this function and \code{\link{cc_from_file}} are preferred to \code{\link{cc_from_list}}, as this prevents usernames and passwords being included in source code.
-#'
-#'
-#' @param dict_type Clinical concept dictionary type. Currently supported are NHSReadV2, NHSReadV3, NHSICD10 and NHSSnomedCT
-#' @param filename  Name of JSON file in user's home directory containing options to use to create a clinical dictionary object
-#'
-#' @export
-#' @seealso \code{\link{cc_from_list}}, \code{\link{cc_from_file}}
-#' @examples
-#' \dontrun{
-#' dict<-cc_from_home("NHSReadV3","dictconfig.ini")
-#'
-#' #clinical dictionary object then passed to other functions
-#' ...
-#'}
-cc_from_home <- function(dict_type,filename) {
-  home<-Sys.getenv('USERPROFILE')
-
-  #deal with non-Windows system
-  if(nchar(home)==0) {
-    home<-home<-Sys.getenv('HOME')
-  }
-  filepath<-paste(home,filename,sep = "/")
-
-  cc_from_file(dict_type,filepath)
 }
 
 #' Utility function to determine if clinical dictionary connection is available/connects

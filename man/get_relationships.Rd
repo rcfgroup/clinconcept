@@ -21,7 +21,8 @@ Get child/parent pairs in a data.frame for a specific code
 }
 \examples{
 \dontrun{
-dict<-cc_from_file("/path/to/dictconfig")
+config_file<-paste0(system.file("clinconcept"),"/extdata/dictconfig.json")
+dict<-cc_from_file("NHSReadV3",config_file)
 h3_rels<-get_relationships(dict,"H31..",children=F)
 }
 }

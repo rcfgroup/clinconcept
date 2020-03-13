@@ -20,7 +20,8 @@ Get parent codes from the supplied clinical dictionary
 }
 \examples{
 \dontrun{
-dict<-cc_from_file("/path/to/dictconfig")
+config_file<-paste0(system.file("clinconcept"),"/extdata/dictconfig.json")
+dict<-cc_from_file("NHSReadV3",config_file)
 h3_parent_codes<-get_parent_codes(dict,"H3...",immediate_parents=F)
 
 }

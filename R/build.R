@@ -120,10 +120,6 @@ write_table_from_file<-function(src,table_name,filename,col_names=TRUE,col_types
 #'
 #' @return File name
 #'
-#' @examples
-#'\dontrun{
-#' find_matching_file("/path/to/data","/description/")
-#'}
 find_matching_file<-function(file_path,match) {
   files_in_path=Sys.glob(paste0(file_path,"/*"));
   file<-grep(match,files_in_path,value=T)
