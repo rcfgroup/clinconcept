@@ -1,17 +1,6 @@
 
 setup_test_dict<-function(dict_type,force_create=F) {
   test_path = getwd()
-
-  if(test_mysql()) {
-    print("Testing mysql");
-    dict<-cc_from_home(dict_type,"cc_db_config.json")
-    dict$sql_path=system.file("sql",package="clinconcept")
-
-    if(force_create) {
-      build_concept_tables(dict,system.file("test_data",dict_type,package="clinconcept"))
-    }
-  }
-  else {
     db_path<-paste0(test_path,"/test_",dict_type,".sqlite")
 
     dict<-cc_from_list(dict_type,list(type="sqlite",dbname=db_path))
@@ -20,7 +9,6 @@ setup_test_dict<-function(dict_type,force_create=F) {
     if(!file.exists(db_path) | force_create) {
       build_concept_tables(dict,system.file("test_data",dict_type, package="clinconcept"))
     }
-  }
 
   dict;
 }

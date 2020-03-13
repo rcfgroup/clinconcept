@@ -13,7 +13,7 @@ get_ctable_term_field.NHSICD10<-function(dict) {
 build_concept_tables.NHSICD10 <- function(dict,replacements) {
   #read CSV data into table
   file_path<-paste0(replacements[['data-file-path']],"/Content/")
-  icd10<-readr::read_tsv(find_matching_file(file_path,"ICD10_Edition5_CodesAndTitlesAndMetadata"),
+  icd10<-readr::read_tsv(find_matching_file(file_path,"ICD10"),
                          col_names=c("icd10_code","alt_icd10_code","usage","usage_uk","term","modifier_4","modifier_5","qualifiers","gender_mask","min_age","max_age","tree_description"),skip=1)
   DBI::dbWriteTable(dict$src,"icd10_edition5",icd10)
 }

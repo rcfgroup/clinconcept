@@ -17,8 +17,3 @@ File name
 \description{
 Find file matching regular expression in directory. Used to retrieve code files which vary depending on version.
 }
-\examples{
-\dontrun{
-find_matching_file("/path/to/data","/description/")
-}
-}

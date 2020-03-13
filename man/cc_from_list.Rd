@@ -26,7 +26,7 @@ The preferred approach is to use \code{\link{cc_from_file}} as this is more secu
 }
 \examples{
 \dontrun{
-dict<-cc_from_list(list(type="sqlite",dbname="/path/to/sqlitedb.sqlite"))
+dict<-cc_from_list(list(type="sqlite",dbname=paste0(tempdir(),"/sqlitedb.sqlite")))
 
 #clinical dictionary object then passed to other functions
 ...
@@ -34,5 +34,5 @@ dict<-cc_from_list(list(type="sqlite",dbname="/path/to/sqlitedb.sqlite"))
 
 }
 \seealso{
-\code{\link{cc_from_file}}, \code{\link{cc_from_home}}
+\code{\link{cc_from_file}}
 }

@@ -12,7 +12,8 @@ setRefClass("code_data",fields=list(relations="vector",last_relations="vector",r
 #'
 #' @examples
 #'\dontrun{
-#' dict<-cc_from_file("/path/to/dictconfig")
+#' config_file<-paste0(system.file("clinconcept"),"/extdata/dictconfig.json")
+#' dict<-cc_from_file("NHSReadV3",config_file)
 #' h3_parent_codes<-get_parent_codes(dict,"H3...",immediate_parents=F)
 #'
 #'}
@@ -30,7 +31,8 @@ get_parent_codes<-function(dict,code,immediate_parents=F,active_only=T) {
 #'
 #' @examples
 #'\dontrun{
-#' dict<-cc_from_file("/path/to/dictconfig")
+#' config_file<-paste0(system.file("clinconcept"),"/extdata/dictconfig.json")
+#' dict<-cc_from_file("NHSReadV3",config_file)
 #' h3_child_codes<-get_parent_codes(dict,"H31..",immediate_children=F)
 #'}
 get_child_codes<-function(dict,code,immediate_children=F,active_only=T) {
@@ -48,7 +50,8 @@ get_child_codes<-function(dict,code,immediate_children=F,active_only=T) {
 #'
 #' @examples
 #'\dontrun{
-#' dict<-cc_from_file("/path/to/dictconfig")
+#' config_file<-paste0(system.file("clinconcept"),"/extdata/dictconfig.json")
+#' dict<-cc_from_file("NHSReadV3",config_file)
 #' h3_rels<-get_relationships(dict,"H31..",children=F)
 #'}
 get_relationships<-function(dict,code,children) {

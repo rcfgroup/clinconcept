@@ -8,7 +8,8 @@
 #' @export
 #' @examples
 #'\dontrun{
-#' config<-cc_from_file("/path/to/dictconfig")
+#' config_file<-paste0(system.file("clinconcept"),"/extdata/dictconfig.json")
+#' config<-cc_from_file("NHSReadV3",config_file)
 #'
 #' #return all read codes containing 'asthma' and 'lung'
 #'

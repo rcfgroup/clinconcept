@@ -10,7 +10,7 @@ get_ptable_parent_field.NHSSnomedCT<-function(dict) {"parent_snomed_code"}
 build_concept_tables.NHSSnomedCT <- function(dict,replacements) {
   data_file_path = replacements[['data-file-path']]
   file_path<-paste0(data_file_path,"/Full/Terminology")
-  write_table_from_file(dict$src,"snomed_description",find_matching_file(file_path,"Description"),delim="\t",file_col_types="ccccccccc", col_names = c("id", "effectiveTime", "active", "moduleId", "snomed_code",
+  write_table_from_file(dict$src,"snomed_description",find_matching_file(file_path,"_Description"),delim="\t",file_col_types="ccccccccc", col_names = c("id", "effectiveTime", "active", "moduleId", "snomed_code",
                                                                                                                                                        "languageCode", "typeId", "term", "caseSignificanceId"),skip_rows=1)
   write_table_from_file(dict$src,"snomed_relationship",find_matching_file(file_path,"_Relationship"),delim="\t",file_col_types="cccccccccc",col_names = c("id", "effectiveTime", "active", "moduleId", "snomed_code",                                                                                                                                                "parent_snomed_code", "relationshipGroup", "typeId", "characteristicTypeId",                                                                                                                                                        "modifierId"),skip_rows=1)
 }
