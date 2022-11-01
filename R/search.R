@@ -19,17 +19,18 @@
 search_concepts<-function(dict, ..., include_synonyms=F,output="tbl") {
   UseMethod("search_concepts")
 }
-search_concepts.clinconcept<-function(dict, ..., output="tbl") {
+
+search_concepts.clinconcept<-function(dict, ..., include_synonyms=F, output="tbl") {
   code_field<-get_ctable_code_field(dict);
   term_field<-get_ctable_term_field(dict);
   read_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict))
-  all_columns<-read_tbl$ops$vars
+  all_columns<-colnames(read_tbl)
   sel_columns<-c(code_field,term_field)
   sel_columns<-c(sel_columns,setdiff(all_columns,sel_columns))
 
   read_tbl<-dplyr::select(read_tbl,sel_columns)
   fcall<-match.call(expand.dots = T)
-  search_concept_table(read_tbl,fcall,T,output)
+  search_concept_table(read_tbl,fcall,include_synonyms,output)
 }
 
 search_concept_table<-function(tbl,fcall,include_synonyms,output) {
