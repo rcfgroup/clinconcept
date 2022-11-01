@@ -23,7 +23,7 @@ search_concepts.clinconcept<-function(dict, ..., output="tbl") {
   code_field<-get_ctable_code_field(dict);
   term_field<-get_ctable_term_field(dict);
   read_tbl<-dplyr::tbl(dict$src,get_ctable_name(dict))
-  all_columns<-read_tbl$ops$vars
+  all_columns<-colnames(read_tbl)
   sel_columns<-c(code_field,term_field)
   sel_columns<-c(sel_columns,setdiff(all_columns,sel_columns))
 
