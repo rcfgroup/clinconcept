@@ -144,7 +144,7 @@ Once dictionary building is complete, advanced searches can be carried out using
 #find all concepts containing the term 'Asthma':
 asthma<-search_concepts(dict, term == "Asthma")
 
-#find concepts containing the term 'Asthma' but excluding 'Eosinophilic asthma':
+#find concepts containing the term 'Asthma' but excluding 'Bronchial asthma':
 asthma<-search_concepts(dict, term \%like\% "\%asthma\%" & (! term == "Bronchial asthma")
 \end{CodeInput}
 
