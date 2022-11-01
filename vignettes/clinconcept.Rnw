@@ -142,10 +142,10 @@ Once dictionary building is complete, advanced searches can be carried out using
 
 \begin{CodeInput}
 #find all concepts containing the term 'Asthma':
-asthma<-search_concepts(dict, term == "Asthma")
+asthma<-search_concepts(dict, term \%like\% "%asthma%")
 
 #find concepts containing the term 'Asthma' but excluding 'Eosinophilic asthma':
-asthma<-search_concepts(dict, term == "Asthma" & (! term == "Eosinophilic asthma")
+asthma<-search_concepts(dict, term \%like\% "%asthma%" & (! term == "Eosinophilic asthma")
 \end{CodeInput}
 
 Due to the nature of clinical concept codes it is important to ensure that case-sensitivity is taken into account. Unfortunately SQLite queries are by default not case-sensitive, which can cause incorrect concepts to be returned. To manage this, \pkg{clinconcept} provides utility functions to enable and disable case sensitivity which should be included at appropriate points in programs. It is not necessary to use these functions if using a DBMS other than SQLite, however if present they will be ignored.
